@@ -36,7 +36,7 @@ export default async function Home() {
       </article>
 
       <article className="mx-32">
-        <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 justify-items-center">
+        <div className="my-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 justify-items-center">
           {allPost.map((item) => (
             <div className="max-w-[300px] shadow-md" key={item.id}>
               {/* <img src={item.avatar} alt="" /> */}

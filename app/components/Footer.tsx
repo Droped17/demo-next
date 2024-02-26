@@ -3,7 +3,7 @@ export default function Footer(){
         <footer className="flex justify-between p-2 border">
             <div className="flex gap-3">
                 <p>Logo</p>
-                <p>2020 copyright all rights reserved</p>
+                <p>this is footer</p>
             </div>
             <div className="flex gap-3">
                 <p>ig</p>
