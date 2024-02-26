@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Card from "./components/Card";
 
 // Server Component
 const getBlog = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const res = await fetch("https://65dc325c3ea883a15292ae24.mockapi.io/post");
   if (!res.ok) {
     throw new Error("cannot fetch");
   }
@@ -10,11 +11,11 @@ const getBlog = async () => {
 };
 
 export default async function Home() {
-  const user: User[] = await getBlog();
+  const allPost: Post[] = await getBlog();
   // console.log(user);
 
   return (
-    <main className="">
+    <main className="flex flex-col gap-3">
       <article className="w-full border flex">
         <div className="flex-1 flex items-center justify-center">
           <p>Make</p>
@@ -34,12 +35,27 @@ export default async function Home() {
         </div>
       </article>
 
-      <article>
-        {user.map((item) => (
-          <div key={item.id}>
-            {item.id} : {item.name}
-          </div>
-        ))}
+      <article className="mx-32">
+        <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 justify-items-center">
+          {allPost.map((item) => (
+            <div className="max-w-[300px] shadow-md" key={item.id}>
+              {/* <img src={item.avatar} alt="" /> */}
+                <Image
+                  alt="Description of image"
+                  src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
+                  layout="responsive"
+                  width={500}
+                  height={300}
+                  loading="lazy"
+                />
+              <div className="p-3">
+              <p>{item.name}</p>
+              <p>{item.title}</p>
+              </div>
+            </div>
+            // <Card name={item.name} key={item.id} />
+          ))}
+        </div>
       </article>
     </main>
   );

@@ -1,6 +1,7 @@
-type User = {
+type Post = {
     id: null,
     name: string,
-    username: string,
-    email: string
+    title: string,
+    createdAt: string,
+    avatar: string
 };
