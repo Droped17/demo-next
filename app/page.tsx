@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Card from "./components/Card";
+import { getServerSession } from "next-auth";
+import { options } from "./api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 // Server Component
 const getBlog = async () => {
@@ -13,6 +16,12 @@ const getBlog = async () => {
 export default async function Home() {
   const allPost: Post[] = await getBlog();
   // console.log(user);
+
+  const session = await getServerSession(options);
+  if (!session) {
+    redirect('/api/auth/signin?callbackUrl=/server');
+    // redirect('/login');
+  }
 
   return (
     <main className="flex flex-col gap-3">
