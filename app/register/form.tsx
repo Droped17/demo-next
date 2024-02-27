@@ -17,8 +17,8 @@ export default function RegisterForm(){
     };
     return (
         <form onSubmit={handleSubmit}>
-                <input type="text" />
-                <input type="password" />
+                <input name="username" type="text" className="border"/>
+                <input name="password" type="password" className="border"/>
                 <button type="submit">Register</button>
             </form>
     );

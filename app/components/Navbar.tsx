@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-// import { options } from "../api/auth/[...nextauth]/options";
+import { options } from "../api/auth/[...nextauth]/options";
 
 export default async function Navbar() {
-  // const session = await getServerSession(options);
+  const session = await getServerSession(options);
   // console.log("NAVBAR SESSION ===>: ", session);
 
   return (
@@ -20,6 +20,7 @@ export default async function Navbar() {
         ) : (
           <Link href="/login">Login</Link>
         )} */}
+        <Link href="/login">Login</Link>
         <Link href="/blog">Blog</Link>
         <Link href="/api/auth/signout">
           <button className="bg-red-500 p-1 text-white rounded-md">SignOut</button>

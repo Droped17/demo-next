@@ -17,11 +17,11 @@ export default async function Home() {
   const allPost: Post[] = await getBlog();
   // console.log(user);
 
-  const session = await getServerSession(options);
-  if (!session) {
-    redirect('/api/auth/signin?callbackUrl=/server');
-    // redirect('/login');
-  }
+  // const session = await getServerSession(options);
+  // if (!session) {
+  //   redirect('/api/auth/signin?callbackUrl=/server');
+  //   // redirect('/login');
+  // }
 
   return (
     <main className="flex flex-col gap-3">

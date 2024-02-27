@@ -1,29 +1,34 @@
 "use client";
 
+import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
 
 export default function LoginForm() {
-  const [input, setInput] = useState({
-    username: "",
-    password: "",
-  });
-
-  const handleLogin = (e: FormEvent) => {
+  const handleSubmit = async(e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("login");
-  };
+    const formData = new FormData(e.currentTarget);
+    signIn("credentials",{
+      username: formData.get('username'),
+      password: formData.get("password"),
+      redirect: false
+    });
+
+    
+};
   return (
     <form
-      onSubmit={handleLogin}
+      onSubmit={handleSubmit}
       className="flex flex-col justify-around h-[150px] w-[500px]"
     >
       <input
         type="text"
+        name="username"
         placeholder="username"
         className="border rounded-full p-2"
       />
       <input
         type="password"
+        name="password"
         placeholder="password"
         className="border rounded-full p-2"
       />
