@@ -1,7 +1,15 @@
 import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { compare } from "bcrypt";
+import User from "@/app/models/Users";
+import bcrypt from "bcrypt";
+import { Document } from "mongoose";
+
+interface UserDocument extends Document {
+  username: string;
+  password: string;
+  // Add other fields as needed
+}
 
 export const options: NextAuthOptions = {
   providers: [
@@ -32,34 +40,65 @@ export const options: NextAuthOptions = {
       //     }
       // }
 
+      // #######################################
+
       // create authorize
       async authorize(credentials, req) {
-        // JWT
-        // const res = await fetch("http://localhost:3000/api/auth/signin", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     username: credentials?.username,
-        //     password: credentials?.password,
-        //   }),
-        // });
-        // const user = await res.json();
-        // console.log({ user });
+        try {
+          // OK found
+          const foundUser = await User.findOne({
+            username: credentials?.username,
+          })
+          .exec();
+          console.log(`Found User: `, foundUser);
 
-        // // mock user
-        // // const user = {id: "1", name: "admin",password: "123456"}
+          if (foundUser) {
+            console.log("User Exits");
+            const match = await bcrypt.compare(
+              credentials?.password as string,
+              foundUser.password
+            );
 
-        // // Check Session
-        // if (user) {
-        //   return user;
-        // } else {
-        //   return null;
-        // }
-        console.log({credentials});
+            if (match) {
+              console.log("Good Pass");
+              // delete foundUser.password;
+              return foundUser;
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+
+        // console.log({ credentials });
         return null;
       },
+
+      //   // JWT
+      //   // const res = await fetch("http://localhost:3000/api/auth/signin", {
+      //   //   method: "POST",
+      //   //   headers: {
+      //   //     "Content-Type": "application/json",
+      //   //   },
+      //   //   body: JSON.stringify({
+      //   //     username: credentials?.username,
+      //   //     password: credentials?.password,
+      //   //   }),
+      //   // });
+      //   // const user = await res.json();
+      //   // console.log({ user });
+
+      //   // // mock user
+      //   // // const user = {id: "1", name: "admin",password: "123456"}
+
+      //   // // Check Session
+      //   // if (user) {
+      //   //   return user;
+      //   // } else {
+      //   //   return null;
+      //   // }
+      //   console.log({ credentials });
+      //   return null;
+      //  },
     }),
   ],
 

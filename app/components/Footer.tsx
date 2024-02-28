@@ -1,6 +1,6 @@
 export default function Footer(){
     return (
-        <footer className="flex justify-between p-2 border">
+        <footer className="flex justify-between items-center p-2 border h-[7.5vh]">
             <div className="flex gap-3">
                 <p>Logo</p>
                 <p>this is footer</p>

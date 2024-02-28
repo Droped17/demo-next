@@ -39,22 +39,33 @@ export default function RegisterForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        onChange={handleOnChange}
-        value={formData.username}
-        type="text"
-        className="border"
-      />
-      <input
-        name="password"
-        onChange={handleOnChange}
-        value={formData.password}
-        type="password"
-        className="border"
-      />
-      <button type="submit">Register</button>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <div className="flex flex-col">
+        <label htmlFor="">Username</label>
+        <input
+          name="username"
+          onChange={handleOnChange}
+          value={formData.username}
+          type="text"
+          className="border p-2 rounded-md"
+          placeholder="Enter your username"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label htmlFor="">Password</label>
+        <input
+          name="password"
+          onChange={handleOnChange}
+          value={formData.password}
+          type="password"
+          className="border p-2 rounded-md"
+          placeholder="Enter your password"
+        />
+      </div>
+      <button type="submit" className="rounded-full text-white  p-2 bg-primary">
+        Register
+      </button>
     </form>
   );
 }
