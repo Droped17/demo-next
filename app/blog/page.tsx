@@ -48,7 +48,7 @@ export default async function Blog() {
       {session && <PostForm />}
       <div className="flex flex-col gap-2 mx-32">
         {allPost.map((item) => (
-          <div key={item.id} className="shadow-md rounded-md p-5">
+          <div key={item.id} className="border-l-8 border-secondary shadow-md rounded-md p-5">
             <div className="flex gap-3">
               <img
                 src={item.avatar}
