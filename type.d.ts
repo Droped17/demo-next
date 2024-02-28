@@ -1,4 +1,4 @@
-type Post = {
+interface Posts {
     id: null,
     name: string,
     title: string,

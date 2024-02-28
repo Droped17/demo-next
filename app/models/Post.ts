@@ -5,12 +5,15 @@ mongoose.Promise = global.Promise;
 
 const postSchema = new Schema(
   {
-    username: String,
-    password: String,
+    id: Number,
+    name: String,
+    createdAt: String,
+    title: String,
+    avatar: String
   },
   { timestamps: true }
 );
 
-const User = mongoose.models.Post || mongoose.model("Post",postSchema);
+const Post = mongoose.models.Post || mongoose.model("Post",postSchema);
 
-export default User;
+export default Post;
