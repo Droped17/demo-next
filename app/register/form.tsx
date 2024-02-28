@@ -16,10 +16,10 @@ export default function RegisterForm() {
   const handleOnChange = (e: FormEvent) => {
     const target = e.target as HTMLInputElement;
     const value = target.value;
-    const name = target.name;
+    const username = target.name;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [username]: value,
     }));
   };
 
@@ -41,7 +41,7 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div className="flex flex-col">
-        <label htmlFor="">Username</label>
+        <label htmlFor="">username</label>
         <input
           name="username"
           onChange={handleOnChange}

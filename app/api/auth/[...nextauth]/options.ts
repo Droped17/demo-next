@@ -3,19 +3,27 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/app/models/Users";
 import bcrypt from "bcrypt";
-import { Document } from "mongoose";
-
-interface UserDocument extends Document {
-  username: string;
-  password: string;
-  // Add other fields as needed
-}
 
 export const options: NextAuthOptions = {
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
+
+      profile(profile){
+        console.log(`Profile Github: `,profile)
+        let userRole = "Github User"
+        if (profile.email === "droped17@gmail.com") {
+          userRole = "admin"
+        }
+
+        console.log(`USER ROLE======> `,userRole);
+
+        return {
+          ...profile,
+          role: userRole
+        }
+      }
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -61,7 +69,7 @@ export const options: NextAuthOptions = {
 
             if (match) {
               console.log("Good Pass");
-              // delete foundUser.password;
+              delete foundUser.password;
               return foundUser;
             }
           }
@@ -69,7 +77,7 @@ export const options: NextAuthOptions = {
           console.log(error);
         }
 
-        // console.log({ credentials });
+        console.log({ credentials });
         return null;
       },
 
@@ -102,16 +110,14 @@ export const options: NextAuthOptions = {
     }),
   ],
 
-  // callbacks: {
-  //   async jwt({ token, account }) {
-  //     if (account) {
-  //       token.accessToken = account.access_token;
-  //     }
-  //     return token;
-  //   },
-  //   async session({ session, token, user }) {
-  //     (session as any).accessToken = token.accessToken;
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) (token as any).role = (user as any).role;
+      return token;
+    },
+    async session({ session, token, user }) {
+      (session as any).accessToken = token.accessToken;
+      return session;
+    },
+  },
 };

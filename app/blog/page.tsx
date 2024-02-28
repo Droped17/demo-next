@@ -14,25 +14,25 @@ export default async function Blog() {
   const allPost: Post[] = await getAllPost();
 
   const session = await getServerSession(options);
-  
-  console.log('SESSION IS: ',session);
+  // console.log('SESSION IS: ',session);
 
-    //format the date
-    const formatDate = (dateString: string) => {
-      const date = new Date(dateString);
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
-    };
+  //format the date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
+
   return (
     <div className="flex flex-col gap-4">
-      <PostForm />
-      {session ? <div className="flex flex-col gap-2 mx-32">
+      {session ? <PostForm /> : null}
+      <div className="flex flex-col gap-2 mx-32">
         {allPost.map((item) => (
           <div key={item.id} className="shadow-md rounded-md p-5">
             <div className="flex gap-3">
@@ -50,7 +50,7 @@ export default async function Blog() {
             <p>{item.title}</p>
           </div>
         ))}
-      </div> : <p>Login before</p>}
+      </div>
     </div>
   );
 }

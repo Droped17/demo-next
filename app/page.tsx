@@ -17,11 +17,11 @@ export default async function Home() {
   const allPost: Post[] = await getBlog();
   // console.log(user);
 
-  // const session = await getServerSession(options);
-  // if (!session) {
-  //   redirect('/api/auth/signin?callbackUrl=/server');
-  //   // redirect('/login');
-  // }
+  const session = await getServerSession(options);
+  if (!session) {
+    redirect('/register');
+    // redirect('/login');
+  }
 
   return (
     <main className="flex flex-col gap-3">
@@ -47,7 +47,7 @@ export default async function Home() {
       <article className="mx-32">
         <div className="my-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 justify-items-center">
           {allPost.map((item) => (
-            <div className="min-w-[250px] shadow-md" key={item.id}>
+            <div className="max-w-[300px] shadow-md" key={item.id}>
               {/* <img src={item.avatar} alt="" /> */}
                 <Image
                   alt="Description of image"
