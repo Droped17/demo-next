@@ -3,21 +3,16 @@ import { PostForm } from "../components/PostForm";
 import { options } from "../api/auth/[...nextauth]/options";
 import { BlogForm } from "./form";
 import axios from "axios";
-
+import  Comment  from "../comments/page";
 
 interface Post {
-  id: string;
+  _id: string;
   avatar: string;
   name: string;
   createdAt: string;
   title: string;
+  comments: [];
 }
-
-interface ApiResponse {
-  message: string;
-  allPost: Post[];
-}
-
 
 const getAllPost = async () => {
   try {
@@ -36,8 +31,6 @@ const getAllPost = async () => {
     // console.log(data);
 
     // return data.allPost;
-
-
   } catch (error) {
     console.error("Error fetching posts:", error);
     return []; // Return an empty array if there's an error
@@ -47,7 +40,7 @@ const getAllPost = async () => {
 export default async function Blog() {
   const allPost: Post[] = await getAllPost();
 
-  console.log(`All Post: ====> `,allPost);
+  // console.log(`All Post: ====> `,allPost);
 
   const session = await getServerSession(options);
 
@@ -67,26 +60,44 @@ export default async function Blog() {
   return (
     <div className="flex flex-col gap-4">
       {session && <PostForm session={session} />}
-      <div className="flex flex-col gap-2 mx-32">
-        {allPost.map((item,index) => (
-          <div key={index} className="border-l-8 border-secondary shadow-md rounded-md p-5">
+      <div className=" flex flex-col gap-5 mx-32 my-5">
+        {allPost.map((post, index) => (
+          <div
+            key={index}
+            className="border-l-8  border-l-secondary border-t border-t-gray-100 shadow-lg rounded-md p-5"
+          >
             <div className="flex gap-3">
-              {item.avatar ? <img
-                src={item.avatar}
-                alt=""
-                width={50}
-                className="rounded-full"
-              /> : <img alt="" src="/images/michael-sum-LEpfefQf4rU-unsplash.webp" width={50} className="rounded-full"></img>}
+              {/* <p>{post._id}</p> */}
+              {post.avatar ? (
+                <img
+                  src={post.avatar}
+                  alt=""
+                  width={50}
+                  className="rounded-full"
+                />
+              ) : (
+                <img
+                  alt=""
+                  src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
+                  width={50}
+                  className="rounded-full"
+                ></img>
+              )}
               <div>
-                <p>{item.name}</p>
-                <p>{formatDate(item.createdAt)}</p>
+                <p>{post.name}</p>
+                <p>{formatDate(post.createdAt)}</p>
               </div>
             </div>
-            <p className="mt-2">{item.title}</p>
+            <p className="mt-2">{post.title}</p>
             <hr />
-            {session &&  <div className="mt-2">
-              <BlogForm session={session}/>
-            </div>}
+            {session && (
+              <div className="mt-2">
+                <BlogForm session={session} postId={post._id}/>
+              </div>
+            )}
+
+            {/* Comments */}
+            <Comment postId={post._id} />
           </div>
         ))}
       </div>

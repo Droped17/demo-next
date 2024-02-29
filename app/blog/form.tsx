@@ -1,40 +1,44 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import axios from "axios";
 
 interface Props {
-  session: object;
+  session: any;
+  postId: string;
 }
 
 interface FormData {
+  postId: string;
   name: string;
   title: string;
   avatar: string;
   createdAt: Date;
 }
-export const BlogForm: React.FC<Props> = ({ session }) => {
-  // console.log(session);
+export const BlogForm: React.FC<Props> = ({ session, postId }) => {
+  // console.log(`SESSION====> `, session);
+  // console.log(postId);
+
   const currentDate: Date = new Date();
   const [formData, setFormData] = useState<FormData>({
-    name: "",
+    postId: postId,
+    name: session.user.email,
     title: "",
-    avatar: "",
+    avatar:
+      "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1088.jpg" ,
     createdAt: currentDate,
   });
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    const res = await fetch("/api/post", {
-      method: "POST",
-      body: JSON.stringify({
-        formData,
-        "content-type": "application/json",
-      }),
-    });
+    try {
+      e.preventDefault();
+      axios
+        .post("http://localhost:3000/api/comment", { formData })
+        .then((result) => console.log(result.data));
 
-    if (!res.ok) {
-      const response = await res.json();
-      console.error(response.message);
+      // console.log(formData);
+    } catch (error) {
+      console.log("Error", error);
     }
   };
 

@@ -68,12 +68,12 @@ export const PostForm: React.FC<Props> = ({ session }) => {
         </button>
       ) : undefined}
       {isOpen && (
-        <div className="flex flex-col gap-2 shadow-lg p-5 rounded-2xl">
-          <form onSubmit={handleSubmit}>
+        <div className="flex flex-col shadow-xl p-5 rounded-2xl border">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
               type="text"
               name="title"
-              className="border rounded-full p-1"
+              className="border rounded-full p-1 w-full"
               onChange={handleOnChange}
             />
             <div className="flex justify-end gap-1">

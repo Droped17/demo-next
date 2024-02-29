@@ -5,15 +5,33 @@ mongoose.Promise = global.Promise;
 
 const postSchema = new Schema(
   {
-    id: Number,
-    name: String,
-    createdAt: String,
     title: String,
-    avatar: String
+    author: String, // Reference to the user who created the post
+    createdAt: Date,
+    avatar: String,
+    comments: [
+      // Array of comment objects
+      {
+        _id: String,
+        content: String,
+        author: String, // Reference to the user who posted the comment
+        createdAt: Date,
+      },
+    ],
   },
+
+  // {
+  //   id: Number,
+  //   name: String,
+  //   createdAt: String,
+  //   title: String,
+  //   avatar: String,
+  //   comments: String
+  // },
+
   { timestamps: true }
 );
 
-const Post = mongoose.models.Post || mongoose.model("Post",postSchema);
+const Post = mongoose.models.Post || mongoose.model("Post", postSchema);
 
 export default Post;
