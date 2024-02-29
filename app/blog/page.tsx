@@ -3,7 +3,7 @@ import { PostForm } from "../components/PostForm";
 import { options } from "../api/auth/[...nextauth]/options";
 import { BlogForm } from "./form";
 import axios from "axios";
-import  Comment  from "../comments/page";
+import Comment from "../comments/page";
 
 interface Post {
   _id: string;
@@ -60,7 +60,7 @@ export default async function Blog() {
   return (
     <div className="flex flex-col gap-4">
       {session && <PostForm session={session} />}
-      <div className=" flex flex-col gap-5 mx-32 my-5">
+      <div className=" flex flex-col gap-5 sm:mx-20 md:mx-32 my-5">
         {allPost.map((post, index) => (
           <div
             key={index}
@@ -92,7 +92,7 @@ export default async function Blog() {
             <hr />
             {session && (
               <div className="mt-2">
-                <BlogForm session={session} postId={post._id}/>
+                <BlogForm session={session} postId={post._id} />
               </div>
             )}
 
