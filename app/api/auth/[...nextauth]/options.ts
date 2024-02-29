@@ -10,20 +10,20 @@ export const options: NextAuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
 
-      profile(profile){
-        console.log(`Profile Github: `,profile)
-        let userRole = "Github User"
+      profile(profile) {
+        console.log(`Profile Github: `, profile);
+        let userRole = "Github User";
         if (profile.email === "droped17@gmail.com") {
-          userRole = "admin"
+          userRole = "admin";
         }
 
-        console.log(`USER ROLE======> `,userRole);
+        console.log(`USER ROLE======> `, userRole);
 
         return {
           ...profile,
-          role: userRole
-        }
-      }
+          role: userRole,
+        };
+      },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -56,8 +56,7 @@ export const options: NextAuthOptions = {
           // OK found
           const foundUser = await User.findOne({
             username: credentials?.username,
-          })
-          .exec();
+          }).exec();
           console.log(`Found User: `, foundUser);
 
           if (foundUser) {
@@ -70,6 +69,7 @@ export const options: NextAuthOptions = {
             if (match) {
               console.log("Good Pass");
               delete foundUser.password;
+              foundUser["role"] = "Unverified Email";
               return foundUser;
             }
           }
@@ -77,7 +77,7 @@ export const options: NextAuthOptions = {
           console.log(error);
         }
 
-        console.log({ credentials });
+        console.log(`CREDENTIAL:===>`,{ credentials });
         return null;
       },
 
@@ -115,9 +115,11 @@ export const options: NextAuthOptions = {
       if (user) (token as any).role = (user as any).role;
       return token;
     },
-    async session({ session, token, user }) {
+    async session({ session, token,user}) {
+      // console.log(session);
+      if (session.user) (session.user as any).role = (token as any).role;
       (session as any).accessToken = token.accessToken;
-      return session;
+      return session || {};
     },
   },
 };

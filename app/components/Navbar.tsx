@@ -14,7 +14,7 @@ export default async function Navbar() {
       <div className="">
         {session ? (
           <div className="flex gap-2 flex-1 items-center justify-end md:w-full">
-            <p>{session.user?.name}</p>
+            <p>{session.user?.email}</p>
             <Link href="/blog">Blog</Link>
             <Link href="/api/auth/signout">
               <button className="bg-red-500 p-1 text-white rounded-md">

@@ -1,6 +1,9 @@
 import { getServerSession } from "next-auth";
-import PostForm from "../components/PostForm";
+import { PostForm } from "../components/PostForm";
 import { options } from "../api/auth/[...nextauth]/options";
+import { BlogForm } from "./form";
+import axios from "axios";
+
 
 interface Post {
   id: string;
@@ -15,18 +18,36 @@ interface ApiResponse {
   allPost: Post[];
 }
 
-const getAllPost = async (): Promise<Post[]> => {
-  const res = await fetch("http://localhost:3000/api/post");
-  if (!res.ok) {
-    throw new Error("Cannot fetch Post");
+
+const getAllPost = async () => {
+  try {
+    const res = await axios.get("http://localhost:3000/api/post");
+    // console.log(res.data);
+    return res.data.allPost;
+
+    //  Fetch cannot fetch all post
+    // const res = await fetch("http://localhost:3000/api/post",{
+    // });
+    // if (!res.ok) {
+    //   throw new Error("Cannot fetch Post");
+    // }
+    // //data fetch 1
+    // const data = await res.json();
+    // console.log(data);
+
+    // return data.allPost;
+
+
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return []; // Return an empty array if there's an error
   }
-  const data: ApiResponse = await res.json();
-  return data.allPost;
 };
 
 export default async function Blog() {
   const allPost: Post[] = await getAllPost();
-  console.log(allPost);
+
+  console.log(`All Post: ====> `,allPost);
 
   const session = await getServerSession(options);
 
@@ -45,23 +66,27 @@ export default async function Blog() {
 
   return (
     <div className="flex flex-col gap-4">
-      {session && <PostForm />}
+      {session && <PostForm session={session} />}
       <div className="flex flex-col gap-2 mx-32">
-        {allPost.map((item) => (
-          <div key={item.id} className="border-l-8 border-secondary shadow-md rounded-md p-5">
+        {allPost.map((item,index) => (
+          <div key={index} className="border-l-8 border-secondary shadow-md rounded-md p-5">
             <div className="flex gap-3">
-              <img
+              {item.avatar ? <img
                 src={item.avatar}
                 alt=""
                 width={50}
                 className="rounded-full"
-              />
+              /> : <img alt="" src="/images/michael-sum-LEpfefQf4rU-unsplash.webp" width={50} className="rounded-full"></img>}
               <div>
                 <p>{item.name}</p>
                 <p>{formatDate(item.createdAt)}</p>
               </div>
             </div>
-            <p>{item.title}</p>
+            <p className="mt-2">{item.title}</p>
+            <hr />
+            {session &&  <div className="mt-2">
+              <BlogForm session={session}/>
+            </div>}
           </div>
         ))}
       </div>

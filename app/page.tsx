@@ -14,14 +14,14 @@ const getBlog = async () => {
 };
 
 export default async function Home() {
-  const allPost: Post[] = await getBlog();
+  const allPost: Posts[] = await getBlog();
   // console.log(user);
 
   const session = await getServerSession(options);
-  if (!session) {
-    redirect('/register');
-    // redirect('/login');
-  }
+  // if (!session) {
+  //   redirect('/');
+  //   // redirect('/login');
+  // }
 
   return (
     <main className="flex flex-col gap-3">
