@@ -9,7 +9,9 @@ export default async function Navbar() {
   return (
     <nav className="p-2 border-b sticky top-0 bg-white flex justify-between items-center h-[7.5vh]">
       <div className="flex-1 md:w-full">
-        <Link href="/">LOGO</Link>
+        <Link href="/">
+          <p className="font-semibold">My Blog</p>
+        </Link>
       </div>
       <div className="">
         {session ? (

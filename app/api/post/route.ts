@@ -2,12 +2,30 @@ import Post from "@/app/models/Post";
 import { NextRequest, NextResponse } from "next/server";
 
 // Get All post
-export async function GET() {
+// export async function GET() {
+//   try {
+//     const allPost = await Post.find({}).sort({ createdAt: 1 });
+//     return NextResponse.json({ message: "GET Success", allPost });
+//   } catch (error) {
+//     return NextResponse.json({ message: "Error", error });
+//   }
+// }
+
+// Get Post By Id
+export async function GET(req:NextRequest){
   try {
-    const allPost = await Post.find({}).sort({ createdAt: 1 });
-    return NextResponse.json({ message: "GET Success", allPost });
+    const searchParams = req.nextUrl.searchParams
+    // console.log(`SEARCH PARAMS:===>`, searchParams.get("postId"));
+    const params = searchParams.get("postId");
+
+    const foundPost = await Post.findById(params);
+    console.log(`FOUND POST:===> `,foundPost);
+
+
+    return NextResponse.json({message: `Ok happy`,foundPost});
+    // const postById = await Post.findById({})
   } catch (error) {
-    return NextResponse.json({ message: "Error", error });
+       NextResponse.json({message: `Error`});
   }
 }
 

@@ -19,18 +19,6 @@ const getAllPost = async () => {
     const res = await axios.get("http://localhost:3000/api/post");
     // console.log(res.data);
     return res.data.allPost;
-
-    //  Fetch cannot fetch all post
-    // const res = await fetch("http://localhost:3000/api/post",{
-    // });
-    // if (!res.ok) {
-    //   throw new Error("Cannot fetch Post");
-    // }
-    // //data fetch 1
-    // const data = await res.json();
-    // console.log(data);
-
-    // return data.allPost;
   } catch (error) {
     console.error("Error fetching posts:", error);
     return []; // Return an empty array if there's an error

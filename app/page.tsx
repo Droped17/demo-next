@@ -1,33 +1,35 @@
 import Image from "next/image";
-import Card from "./components/Card";
-import { getServerSession } from "next-auth";
-import { options } from "./api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
+import axios from "axios";
 
 // Server Component
-const getBlog = async () => {
-  const res = await fetch("https://65dc325c3ea883a15292ae24.mockapi.io/post");
-  if (!res.ok) {
-    throw new Error("cannot fetch");
+interface Post {
+  _id: string;
+  avatar: string;
+  name: string;
+  createdAt: string;
+  title: string;
+}
+
+const getAllPost = async () => {
+  try {
+    const res = await axios.get("http://localhost:3000/api/post");
+    // console.log(res.data);
+    return res.data.allPost;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return []; // Return an empty array if there's an error
   }
-  return res.json();
 };
 
 export default async function Home() {
-  const allPost: Posts[] = await getBlog();
-  // console.log(user);
-
-  const session = await getServerSession(options);
-  // if (!session) {
-  //   redirect('/');
-  //   // redirect('/login');
-  // }
+  const allPost: Post[] = await getAllPost();
+  // console.log(allPost);
 
   return (
     <main className="flex flex-col gap-3">
       <article className="w-full border flex">
         <div className="flex-1 flex items-center justify-center">
-          <p>Make</p>
+          <h6>Make</h6>
           <p>why learn Next.js</p>
         </div>
         <div className="flex-1">
@@ -44,25 +46,28 @@ export default async function Home() {
         </div>
       </article>
 
-      <article className="mx-32">
-        <div className="my-2 grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 justify-items-center">
-          {allPost.map((item) => (
-            <div className="max-w-[300px] shadow-md" key={item.id}>
-              {/* <img src={item.avatar} alt="" /> */}
-                <Image
-                  alt="Description of image"
+      <article className="sm:mx-5 md:mx-10 lg:mx-32">
+        <div className="my-2 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4 justify-items-center">
+          {allPost.map((post, index) => (
+            <div
+              key={index}
+              className=" border-t-gray-100 shadow-lg rounded-md cursor-pointer hover:shadow-2xl hover:transition"
+            >
+              <div className="flex flex-col gap-3">
+                {/* <p>{post._id}</p> */}
+                <img
                   src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
-                  layout="responsive"
-                  width={500}
-                  height={300}
-                  loading="lazy"
+                  alt=""
                 />
-              <div className="p-3">
-              <p>{item.name}</p>
-              <p>{item.title}</p>
+              </div>
+              <div className="p-2">
+                <p className="mt-2 font-bold">{post.title}</p>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
+                  commodi velit ipsum expedita voluptates deleniti!
+                </p>
               </div>
             </div>
-            // <Card name={item.name} key={item.id} />
           ))}
         </div>
       </article>
