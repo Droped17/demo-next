@@ -3,6 +3,8 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/app/models/Users";
 import bcrypt from "bcrypt";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import clientPromise from "../clientPromise";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -38,21 +40,10 @@ export const options: NextAuthOptions = {
           type: "password",
         },
       },
-
-      // async authorize(credentials){
-      //     const user = {id: "42", name: "John",password: "nextauth"}
-      //     if (credentials?.username === user.name && credentials?.password === user.password) {
-      //         return user;
-      //     } else {
-      //         return null;
-      //     }
-      // }
-
-      // #######################################
-
       // create authorize
       async authorize(credentials, req) {
         try {
+          if (!credentials) return null;
           // OK found
           const foundUser = await User.findOne({
             username: credentials?.username,
@@ -80,46 +71,21 @@ export const options: NextAuthOptions = {
         console.log(`CREDENTIAL:===>`,{ credentials });
         return null;
       },
-
-      //   // JWT
-      //   // const res = await fetch("http://localhost:3000/api/auth/signin", {
-      //   //   method: "POST",
-      //   //   headers: {
-      //   //     "Content-Type": "application/json",
-      //   //   },
-      //   //   body: JSON.stringify({
-      //   //     username: credentials?.username,
-      //   //     password: credentials?.password,
-      //   //   }),
-      //   // });
-      //   // const user = await res.json();
-      //   // console.log({ user });
-
-      //   // // mock user
-      //   // // const user = {id: "1", name: "admin",password: "123456"}
-
-      //   // // Check Session
-      //   // if (user) {
-      //   //   return user;
-      //   // } else {
-      //   //   return null;
-      //   // }
-      //   console.log({ credentials });
-      //   return null;
-      //  },
     }),
   ],
-
+  // adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) (token as any).role = (user as any).role;
+      if (user) (token as any).id = (user as any).id;
       return token;
     },
     async session({ session, token}) {
       // console.log(session);
-      if (session.user) (session.user as any).role = (token as any).role;
-      (session as any).accessToken = token.accessToken;
-      return session || {};
+      if (session.user) (session.user as any).id = (token as any).id;
+      return session;
     },
   },
 };
