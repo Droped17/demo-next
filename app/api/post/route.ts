@@ -1,31 +1,26 @@
 import Post from "@/app/models/Post";
 import { NextRequest, NextResponse } from "next/server";
 
-// Get All post
-// export async function GET() {
-//   try {
-//     const allPost = await Post.find({}).sort({ createdAt: 1 });
-//     return NextResponse.json({ message: "GET Success", allPost });
-//   } catch (error) {
-//     return NextResponse.json({ message: "Error", error });
+
+// HTTP handler function
+// export async function handler(req: NextRequest) {
+//   const searchParams = req.nextUrl.searchParams;
+//   const postId = searchParams.get("postId");
+
+//   if (postId) {
+//     return GET_id(req);
+//   } else {
+//     return GET();
 //   }
 // }
 
-// Get Post By Id
-export async function GET(req:NextRequest){
+// Get All post
+export async function GET() {
   try {
-    const searchParams = req.nextUrl.searchParams
-    // console.log(`SEARCH PARAMS:===>`, searchParams.get("postId"));
-    const params = searchParams.get("postId");
-
-    const foundPost = await Post.findById(params);
-    console.log(`FOUND POST:===> `,foundPost);
-
-
-    return NextResponse.json({message: `Ok happy`,foundPost});
-    // const postById = await Post.findById({})
+    const allPost = await Post.find({}).sort({ createdAt: 1 });
+    return NextResponse.json({ message: "GET Success", allPost });
   } catch (error) {
-       NextResponse.json({message: `Error`});
+    return NextResponse.json({ message: "Error", error });
   }
 }
 

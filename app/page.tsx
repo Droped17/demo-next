@@ -1,5 +1,6 @@
 import Image from "next/image";
 import axios from "axios";
+import Link from "next/link";
 
 // Server Component
 interface Post {
@@ -49,25 +50,27 @@ export default async function Home() {
       <article className="sm:mx-5 md:mx-10 lg:mx-32">
         <div className="my-2 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4 justify-items-center">
           {allPost.map((post, index) => (
-            <div
-              key={index}
-              className=" border-t-gray-100 shadow-lg rounded-md cursor-pointer hover:shadow-2xl hover:transition"
-            >
-              <div className="flex flex-col gap-3">
-                {/* <p>{post._id}</p> */}
-                <img
-                  src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
-                  alt=""
-                />
+            <Link href={`/blog/${post._id}`} key={index}>
+              {" "}
+              <div
+                className=" border-t-gray-100 shadow-lg rounded-md cursor-pointer hover:shadow-2xl hover:transition"
+              >
+                <div className="flex flex-col gap-3">
+                  {/* <p>{post._id}</p> */}
+                  <img
+                    src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
+                    alt=""
+                  />
+                </div>
+                <div className="p-2">
+                  <p className="mt-2 font-bold">{post.title}</p>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Atque commodi velit ipsum expedita voluptates deleniti!
+                  </p>
+                </div>
               </div>
-              <div className="p-2">
-                <p className="mt-2 font-bold">{post.title}</p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-                  commodi velit ipsum expedita voluptates deleniti!
-                </p>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       </article>
