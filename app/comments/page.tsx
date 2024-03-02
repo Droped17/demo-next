@@ -37,7 +37,7 @@ const Comment: React.FC<Props> = ({ postId }) => {
       {allComment.map((comment, index) => (
         <div key={`${comment.postId} ${index}`}>
           {postId === comment.postId ? (
-            <div className="border-l-8 border-primary p-1 bg-gray-100 rounded-md mt-3">
+            <div className="border-l-8 border-secondary p-1 bg-gray-100 rounded-md mt-3">
               <div className="flex gap-2 items-center">
                 <img
                   src={comment.avatar}

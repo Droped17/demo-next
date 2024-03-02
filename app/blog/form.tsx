@@ -25,7 +25,7 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
     name: session.user.email,
     title: "",
     avatar:
-      "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1088.jpg" ,
+      "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1088.jpg",
     createdAt: currentDate,
   });
 
@@ -35,8 +35,7 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
       axios
         .post("http://localhost:3000/api/comment", { formData })
         .then((result) => console.log(result.data));
-
-      // console.log(formData);
+      window.location.reload();
     } catch (error) {
       console.log("Error", error);
     }
@@ -54,12 +53,16 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
+      <textarea
         onChange={handleOnChange}
         name="title"
-        className="border rounded-full w-full p-1"
+        className="border w-full p-1"
       />
+      <div className="text-end">
+        <button type="submit" className="p-1 bg-primary rounded-md text-white">
+          Comment
+        </button>
+      </div>
     </form>
   );
 };

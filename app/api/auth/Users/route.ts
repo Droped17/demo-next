@@ -1,6 +1,8 @@
 import User from "@/app/models/Users";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import { getServerSession } from "next-auth";
+import { options } from "../[...nextauth]/options";
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,8 +27,8 @@ export async function POST(req: NextRequest) {
 
     await User.create(userData);
     return NextResponse.json({ message: "Create User Success" });
-  
   } catch (error) {
     return NextResponse.json({ message: "Error", error });
   }
 }
+

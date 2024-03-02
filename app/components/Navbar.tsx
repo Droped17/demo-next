@@ -10,14 +10,18 @@ export default async function Navbar() {
     <nav className="p-2 border-b sticky top-0 bg-white flex justify-between items-center h-[7.5vh]">
       <div className="flex-1 md:w-full">
         <Link href="/">
-          <p className="font-semibold">My Blog</p>
+          <p>My Blog</p>
         </Link>
       </div>
+      {/* <div className="flex-1">
+        <input type="text" className="" placeholder="Search..."/>
+      </div> */}
       <div className="">
         {session ? (
           <div className="flex gap-2 flex-1 items-center justify-end md:w-full">
             <p>{session.user?.email}</p>
-            <Link href="/blog">Blog</Link>
+            <Link href="/">Home</Link>
+            <Link href="/">Article</Link>
             <Link href="/api/auth/signout">
               <button className="bg-red-500 p-1 text-white rounded-md">
                 SignOut
@@ -26,7 +30,8 @@ export default async function Navbar() {
           </div>
         ) : (
           <div className="flex gap-2">
-            <Link href="/blog">Blog</Link>
+            <Link href="/">Home</Link>
+            <Link href="/">Article</Link>
             <Link href="/api/auth/signin">Login</Link>
             <Link href="/register">Register</Link>
           </div>

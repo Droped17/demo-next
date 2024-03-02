@@ -3,6 +3,9 @@
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Comment from "@/app/comments/page";
+import { useSession } from "next-auth/react";
+import { BlogForm } from "../form";
 
 const getPostById = async (params: any) => {
   try {
@@ -12,9 +15,11 @@ const getPostById = async (params: any) => {
     return res.data.foundPost;
   } catch (error) {
     console.error("Error fetching posts:", error);
-    return []; // Return an empty array if there's an error
+    return []; 
   }
 };
+
+
 
 interface Post {
   _id: string;
@@ -27,8 +32,8 @@ interface Post {
 
 export default function BlogId() {
   const params = useParams<{ id: string }>();
-  // console.log(`PARAMS:===>`, params.id);
   const [postById, setPostById] = useState<Post | null>(null);
+  const { data: session, status } = useSession()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,9 +60,14 @@ export default function BlogId() {
 
         <div className="p-5 border bg-gray-200">
           <p>Comment Zone!</p>
-          <textarea className="border w-full min-h-[10vh]" />
-          <div className="text-end">
-            <button className="p-2 bg-primary rounded-lg text-white">Comment</button>
+          {session && (
+              <div className="mt-2">
+                <BlogForm session={session} postId={params.id} />
+              </div>
+            )}
+
+          <div className="">
+            <Comment postId={params.id} />
           </div>
         </div>
       </div>

@@ -28,16 +28,16 @@ const getAllPost = async () => {
 
 export default async function Home() {
   const allPost: Post[] = await getAllPost();
-  // console.log(allPost);
-
   const session = await getServerSession(options);
 
   return (
     <main className="flex flex-col gap-3">
       <article className="w-full border flex">
-        <div className="flex-1 flex items-center justify-center">
-          <h6>Make</h6>
-          <p>why learn Next.js</p>
+        <div className="flex-1 flex flex-wrap flex-col items-center justify-center">
+          <div className="flex flex-col flex-wrap">
+          <p className="sm:text-sm lg:text-2xl">Make better coffee</p>
+          <p className="sm:text-sm lg:text-sm text-gray-300">why learn how to blog?</p>
+          </div>
         </div>
         <div className="flex-1">
           <div style={{ width: "100%", maxWidth: "500px" }}>
