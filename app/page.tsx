@@ -1,6 +1,10 @@
 import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
+import { formatDate } from "@/lib/formatDate";
+import { getServerSession } from "next-auth";
+import { options } from "./api/auth/[...nextauth]/options";
+import { PostForm } from "./components/PostForm";
 
 // Server Component
 interface Post {
@@ -26,6 +30,8 @@ export default async function Home() {
   const allPost: Post[] = await getAllPost();
   // console.log(allPost);
 
+  const session = await getServerSession(options);
+
   return (
     <main className="flex flex-col gap-3">
       <article className="w-full border flex">
@@ -47,11 +53,12 @@ export default async function Home() {
         </div>
       </article>
 
+      {session && <PostForm session={session} />}
+
       <article className="sm:mx-5 md:mx-10 lg:mx-32">
         <div className="my-2 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4 justify-items-center">
           {allPost.map((post, index) => (
             <Link href={`/blog/${post._id}`} key={index}>
-              {" "}
               <div
                 className=" border-t-gray-100 shadow-lg rounded-md cursor-pointer hover:shadow-2xl hover:transition"
               >
@@ -68,6 +75,10 @@ export default async function Home() {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Atque commodi velit ipsum expedita voluptates deleniti!
                   </p>
+                  <div className="flex justify-between">
+                    <p>{formatDate(post.createdAt)}</p>
+                    <p className="font-semibold">Read more</p>
+                  </div>
                 </div>
               </div>
             </Link>

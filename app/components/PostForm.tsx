@@ -58,7 +58,7 @@ export const PostForm: React.FC<Props> = ({ session }) => {
   };
 
   return (
-    <div className="mt-5 text-center mx-32">
+    <div className="mt-5 text-center sm:mx-4 lg:mx-32">
       {isOpen === false ? (
         <button
           onClick={handleOpen}

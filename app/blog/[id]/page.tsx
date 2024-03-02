@@ -52,6 +52,14 @@ export default function BlogId() {
           <p>{postById?.createdAt}</p>
         </div>
         <p>{postById?.title}</p>
+
+        <div className="p-5 border bg-gray-200">
+          <p>Comment Zone!</p>
+          <textarea className="border w-full min-h-[10vh]" />
+          <div className="text-end">
+            <button className="p-2 bg-primary rounded-lg text-white">Comment</button>
+          </div>
+        </div>
       </div>
     </>
   );
