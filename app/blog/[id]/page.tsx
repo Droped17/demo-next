@@ -51,7 +51,7 @@ export default function BlogId() {
           className="w-full h-auto max-w-md"
         />
       </div>
-      <div className="flex flex-col gap-2 lg:mx-32 md:mx-20">
+      <div className="flex flex-col gap-2 lg:mx-32 sm:mx-20">
         <p className="text-3xl font-semibold">{postById?.title}</p>
         <div className="flex gap-3">
           <p className="font-semibold">Written by {postById?.author}</p>
@@ -63,7 +63,7 @@ export default function BlogId() {
  
 
         <div className="p-5 border bg-gray-200">
-          <p>Comment Zone!</p>
+          <p>Comment</p>
           {session && (
             <div className="mt-2">
               <BlogForm session={session} postId={params.id} />

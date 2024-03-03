@@ -32,7 +32,7 @@ export default async function Home() {
   const session = await getServerSession(options);
   return (
     <main className="flex flex-col gap-3">
-      <article className="w-full border flex">
+      <article className="flex sm:mx-5 sm:flex-col-reverse md:flex-row lg:flex-row md:mx-10 lg:mx-32">
         <div className="flex-1 flex flex-wrap flex-col items-center justify-center">
           <div className="flex flex-col flex-wrap">
             <p className="sm:text-sm lg:text-2xl">Make better coffee</p>
@@ -41,21 +41,31 @@ export default async function Home() {
             </p>
           </div>
         </div>
-        <div className="flex-1">
-          <div style={{ width: "100%", maxWidth: "500px" }}>
-            <Image
-              alt="Description of image"
-              src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
-              layout="responsive"
-              width={500}
-              height={300}
-              loading="lazy"
-            />
-          </div>
+        <div className="flex-1 max-h-[40vh] overflow-hidden">
+          <img
+            src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
+            alt=""
+            className="object-fill"
+          />
         </div>
       </article>
 
-      {session && <PostForm session={session} />}
+      {/* <article className="max-h-[30vh] overflow-hidden sm:mx-5 sm:flex-col-reverse md:flex-row lg:flex-row md:mx-10 lg:mx-32 flex">
+        <div className="flex-1 border">
+          <p>Banner</p>
+        </div>
+        <div className="flex-1">
+          <div className="flex flex-col gap-3">
+            <img
+              src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
+              alt=""
+              className="object-fill"
+            />
+          </div>
+        </div>
+      </article> */}
+
+      <article>{session && <PostForm session={session} />}</article>
 
       <article className="sm:mx-5 md:mx-10 lg:mx-32">
         <div className="my-2 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4 justify-items-center">
