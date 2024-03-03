@@ -2,13 +2,14 @@
 
 import { FormEvent, useState } from "react";
 import { Button } from "./Button";
+import axios from "axios";
 
 interface Props {
   session: any;
 }
 
 interface FormData {
-  name: string;
+  author: string;
   title: string;
   detail: string;
   avatar: string;
@@ -24,7 +25,7 @@ export const PostForm: React.FC<Props> = ({ session }) => {
 
   const currentDate: Date = new Date();
   const [formData, setFormData] = useState<FormData>({
-    name: session.user.email,
+    author: session.user.email,
     title: "",
     detail: "",
     avatar: "",
@@ -35,21 +36,11 @@ export const PostForm: React.FC<Props> = ({ session }) => {
     try {
       e.preventDefault();
       console.log(formData);
-      // const res = await fetch("/api/post", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     formData,
-      //     "content-type": "application/json",
-      //   }),
-      // });
-      // if (!res.ok) {
-      //   const response = await res.json();
-      //   console.error(response.message);
-      // }
+      const res = await axios.post("/api/post",{formData});
+      console.log(res.data);
 
       // Wait Dialog
-      // alert("Post Sucess");
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

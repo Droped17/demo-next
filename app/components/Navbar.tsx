@@ -1,13 +1,14 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { options } from "../api/auth/[...nextauth]/options";
+import { Button } from "./Button";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
   // console.log("NAVBAR SESSION ===>: ", session);
 
   return (
-    <nav className="p-2 border-b sticky top-0 bg-white flex justify-between items-center h-[7.5vh]">
+    <nav className="p-2 border-b sticky top-0 bg-white flex justify-between items-center">
       <div className="flex-1 md:w-full">
         <Link href="/">
           <p>My Blog</p>
@@ -23,9 +24,7 @@ export default async function Navbar() {
             <Link href="/">Home</Link>
             <Link href="/">Article</Link>
             <Link href="/api/auth/signout">
-              <button className="bg-red-500 p-1 text-white rounded-md">
-                SignOut
-              </button>
+              <Button onClick={null} title="SignOut" style={`text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-md text-sm p-1 text-center`}/>
             </Link>
           </div>
         ) : (

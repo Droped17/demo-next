@@ -5,30 +5,12 @@ mongoose.Promise = global.Promise;
 
 const postSchema = new Schema(
   {
+    author: String, 
     title: String,
-    author: String, // Reference to the user who created the post
+    detail: String,
     createdAt: Date,
     avatar: String,
-    comments: [
-      // Array of comment objects
-      {
-        _id: String,
-        content: String,
-        author: String, // Reference to the user who posted the comment
-        createdAt: Date,
-      },
-    ],
   },
-
-  // {
-  //   id: Number,
-  //   name: String,
-  //   createdAt: String,
-  //   title: String,
-  //   avatar: String,
-  //   comments: String
-  // },
-
   { timestamps: true }
 );
 

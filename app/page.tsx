@@ -9,10 +9,11 @@ import { PostForm } from "./components/PostForm";
 // Server Component
 interface Post {
   _id: string;
-  avatar: string;
-  name: string;
-  createdAt: string;
+  author: string;
   title: string;
+  detail: string;
+  createdAt: string;
+  avatar: string;
 }
 
 const getAllPost = async () => {
@@ -29,14 +30,15 @@ const getAllPost = async () => {
 export default async function Home() {
   const allPost: Post[] = await getAllPost();
   const session = await getServerSession(options);
-
   return (
     <main className="flex flex-col gap-3">
       <article className="w-full border flex">
         <div className="flex-1 flex flex-wrap flex-col items-center justify-center">
           <div className="flex flex-col flex-wrap">
-          <p className="sm:text-sm lg:text-2xl">Make better coffee</p>
-          <p className="sm:text-sm lg:text-sm text-gray-300">why learn how to blog?</p>
+            <p className="sm:text-sm lg:text-2xl">Make better coffee</p>
+            <p className="sm:text-sm lg:text-sm text-gray-300">
+              why learn how to blog?
+            </p>
           </div>
         </div>
         <div className="flex-1">
@@ -58,12 +60,9 @@ export default async function Home() {
       <article className="sm:mx-5 md:mx-10 lg:mx-32">
         <div className="my-2 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4 justify-items-center">
           {allPost.map((post, index) => (
-            <Link href={`/blog/${post._id}`} key={index}>
-              <div
-                className=" border-t-gray-100 shadow-lg rounded-md cursor-pointer hover:shadow-2xl hover:transition"
-              >
+            <Link href={`/blog/${post._id}`} key={`${post._id}` + index}>
+              <div className=" border-t-gray-100 shadow-lg rounded-md cursor-pointer hover:shadow-2xl hover:transition">
                 <div className="flex flex-col gap-3">
-                  {/* <p>{post._id}</p> */}
                   <img
                     src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
                     alt=""
@@ -71,10 +70,9 @@ export default async function Home() {
                 </div>
                 <div className="p-2">
                   <p className="mt-2 font-bold">{post.title}</p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Atque commodi velit ipsum expedita voluptates deleniti!
-                  </p>
+                  <p>{post.detail && post.detail.slice(0, 100)}</p>
+                  {post.detail && post.detail.length > 100 && <p>...</p>}
+
                   <div className="flex justify-between">
                     <p>{formatDate(post.createdAt)}</p>
                     <p className="font-semibold">Read more</p>
