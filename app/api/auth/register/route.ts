@@ -11,6 +11,7 @@ try {
     
 } catch (e) {
     console.log({e});
+    return NextResponse.json({message: "Error"});
 }
-    return NextResponse.json({message: "success"});
+    // return NextResponse.json({message: "success"});
 }

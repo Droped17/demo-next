@@ -11,7 +11,9 @@ const config: Config = {
       colors: {
         "primary": "#6B46C1",
         "primary-hover" : "#6B46A9",
-        "secondary": "#4caf50"
+        "secondary": "#4caf50",
+        "grey-color": "#FBFBFB",
+        "gray-blog": "#F7FAFC"    
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

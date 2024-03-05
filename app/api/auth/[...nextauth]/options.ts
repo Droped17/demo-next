@@ -33,11 +33,12 @@ export const options: NextAuthOptions = {
         username: {
           label: "Username",
           type: "text",
-          placeholder: "your-cool-name",
+          placeholder: "username",
         },
         password: {
           label: "Password:",
           type: "password",
+          placeholder: "password"
         },
       },
       // create authorize

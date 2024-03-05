@@ -44,11 +44,11 @@ export default function BlogId() {
 
   return (
     <>
-      <div className="lg:mx-24">
+      <div className="mx-[97px]">
         <img
           src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
           alt=""
-          className="w-full h-auto max-w-md"
+          className="w-full max-h-[40vh] object-cover"
         />
       </div>
       <div className="flex flex-col gap-2 lg:mx-32 sm:mx-20">
