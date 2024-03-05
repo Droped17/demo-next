@@ -15,7 +15,7 @@ export default async function Navbar() {
   // console.log("NAVBAR SESSION ===>: ", session);
 
   return (
-    <nav className="p-3 border-b sticky top-0 bg-white flex sm:flex-col md:flex-row lg:flex-row justify-between items-center">
+    <nav className="p-3 border-b sticky top-0 z-20 bg-white flex sm:flex-col md:flex-row lg:flex-row justify-between items-center">
       <div className="flex-1 md:w-full">
         <Link href="/">
           <p className="font-bold">HotCoffee</p>
@@ -62,3 +62,4 @@ export default async function Navbar() {
     </nav>
   );
 }
+

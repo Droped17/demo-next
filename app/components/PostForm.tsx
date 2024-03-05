@@ -25,7 +25,7 @@ export const PostForm: React.FC<Props> = ({ session }) => {
 
   const currentDate: Date = new Date();
   const [formData, setFormData] = useState<FormData>({
-    author: session.user.email,
+    author: session.user.name || session.user.email || "anonymous",
     title: "",
     detail: "",
     avatar: "",

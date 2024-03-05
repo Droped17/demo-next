@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent, useState } from "react";
-import { redirect } from "next/navigation";
+import axios from "axios";
 
 interface FormData {
   username: string;
@@ -24,19 +24,27 @@ export default function RegisterForm() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const res = await fetch("/api/auth/Users", {
-      method: "POST",
-      body: JSON.stringify({
-        formData,
-        "content-type": "application/json",
-      }),
-    });
-
-    if (!res.ok) {
-      const response = await res.json();
-      console.error(response.message);
+    try {
+      e.preventDefault();
+      console.log(formData);
+      // const res = await axios.post("/api/auth/Users", formData);
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
     }
+
+    // const res = await fetch("/api/auth/Users", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     formData,
+    //     "content-type": "application/json",
+    //   }),
+    // });
+
+    // if (!res.ok) {
+    //   const response = await res.json();
+    //   console.error(response.message);
+    // }
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">

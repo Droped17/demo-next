@@ -32,12 +32,13 @@ interface Post {
 export default function BlogId() {
   const params = useParams<{ id: string }>();
   const [postById, setPostById] = useState<Post | null>(null);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     const fetchData = async () => {
       const posts = await getPostById(params.id);
       setPostById(posts);
+      console.log(postById);
     };
     fetchData();
   }, []);
@@ -54,13 +55,12 @@ export default function BlogId() {
       <div className="flex flex-col gap-2 lg:mx-32 sm:mx-20">
         <p className="text-3xl font-semibold">{postById?.title}</p>
         <div className="flex gap-3">
-          <p className="font-semibold">Written by {postById?.author}</p>
-          <p>{postById?.createdAt}</p>
+          <p className="font-semibold ">Written by {postById?.author}</p>
+          <p>{postById?.createdAt && formatDate(postById.createdAt)}</p>
         </div>
         <hr />
 
-       <p>{postById?.detail}</p>
- 
+        <p>{postById?.detail}</p>
 
         <div className="p-5 border bg-gray-200">
           <p>Comment</p>
