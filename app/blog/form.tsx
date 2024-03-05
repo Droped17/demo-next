@@ -22,7 +22,7 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
   const currentDate: Date = new Date();
   const [formData, setFormData] = useState<FormData>({
     postId: postId,
-    name: session.user.email,
+    name: session.user.name,
     title: "",
     avatar:
       "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1088.jpg",

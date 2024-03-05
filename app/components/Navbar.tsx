@@ -28,7 +28,7 @@ export default async function Navbar() {
       <div className="">
         {session ? (
           <div className="flex gap-5 flex-1 items-center justify-end md:w-full">
-            {/* <p>{session.user?.email}</p> */}
+            <p>{session.user?.name}</p>
             <Link href="/">Home</Link>
             <Link href="/">Article</Link>
             <Link href="https://instagram.com">

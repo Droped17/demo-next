@@ -38,55 +38,64 @@ export const options: NextAuthOptions = {
         password: {
           label: "Password:",
           type: "password",
-          placeholder: "password"
+          placeholder: "password",
         },
       },
       // create authorize
       async authorize(credentials, req) {
-        try {
-          if (!credentials) return null;
-          // OK found
-          const foundUser = await User.findOne({
-            username: credentials?.username,
-          }).exec();
-          console.log(`Found User: `, foundUser);
+        // if (!credentials) return null;
+        // Connect to MongoDB already
+        // OK found
+        const foundUser = await User.findOne({
+          username: credentials?.username,
+        }).exec();
 
-          if (foundUser) {
-            console.log("User Exits");
-            const match = await bcrypt.compare(
-              credentials?.password as string,
-              foundUser.password
-            );
-
-            if (match) {
-              console.log("Good Pass");
-              delete foundUser.password;
-              foundUser["role"] = "Unverified Email";
-              return foundUser;
-            }
-          }
-        } catch (error) {
-          console.log(error);
+        if (!foundUser) {
+          throw new Error("Not Found User");
         }
 
-        console.log(`CREDENTIAL:===>`,{ credentials });
-        return null;
+        const match = await bcrypt.compare(
+          credentials?.password as string,
+          foundUser.password
+        );
+
+        return {
+          username: foundUser.username.toString(),
+          ...foundUser,
+        };
+
+        // if (match) {
+        //   return {
+        //     id: foundUser._id.toString(),
+        //     ...foundUser,
+        //   };
+        // }
+
+        // if (match) {
+        //   // console.log("Password Match");
+        //   // console.log(`Found User:====> `,foundUser);
+        //   // delete foundUser.password;
+        //   // foundUser["role"] = "Unverified Email";
+        //   // return foundUser;
+        // }
+
       },
+      // console.log(`CREDENTIAL:===>`,{ credentials });
     }),
   ],
   // adapter: MongoDBAdapter(clientPromise),
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) (token as any).id = (user as any).id;
-      return token;
-    },
-    async session({ session, token}) {
-      // console.log(session);
-      if (session.user) (session.user as any).id = (token as any).id;
-      return session;
-    },
-  },
+  // callbacks: {
+  //   async jwt({ token, user }) {
+  //     if (user) (token as any).id = (user as any).id;
+  //     return token;
+  //   },
+  //   async session({ session, token }) {
+  //     // console.log(session);
+  //     if (session.user) (session.user as any).id = (token as any).id;
+  //     return session;
+  //   },
+  // },
 };
