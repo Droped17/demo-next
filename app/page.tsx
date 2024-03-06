@@ -60,7 +60,7 @@ export default async function Home() {
       <article className="sm:mx-5 md:mx-10 lg:mx-32">
         {/* <div>{postMoreRender}</div> */}
 
-        <div className="my-2 grid gap-x-[33px] gap-y-[45px] lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 justify-items-center">
+        <div className="my-2 grid gap-x-[33px] gap-y-[45px] lg:grid-cols-3 md:grid-cols-6 sm:grid-cols-4 xs:grid-cols-3 justify-items-center">
           {allPost.length !== 0
             ? allPost.slice(0, 5).map((post, index) => (
                 <Link
@@ -68,8 +68,8 @@ export default async function Home() {
                   key={`${post._id}` + index}
                   className={`${
                     index === 0 || index === 4
-                      ? "border shadow-md hover:shadow-lg transition col-span-full w-full object-cover overflow-hidden"
-                      : "lg:col-span-1 md:col-span-2 sm:col-span-2 xs:col-span-3 w-[300px]  border shadow-md hover:shadow-lg transition"
+                      ? "border shadow-md hover:shadow-xl transition col-span-full w-full object-cover overflow-hidden"
+                      : "lg:col-span-1 md:col-span-2 sm:col-span-2 xs:col-span-3 border shadow-md hover:shadow-xl transition"
                   }`}
                 >
          
@@ -109,7 +109,7 @@ export default async function Home() {
             : null}
         </div>
 
-        <section className="my-[43px]">
+        <section className="my-[43px] ">
           <MoreBlog allPost={postMoreRender} />
         </section>
         

@@ -7,6 +7,8 @@ import axios from "axios";
 import Comment from "@/app/comments/page";
 import { BlogForm } from "../form";
 import { formatDate } from "@/lib/formatDate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowTurnUp } from "@fortawesome/free-solid-svg-icons";
 
 const getPostById = async (params: any) => {
   try {
@@ -34,6 +36,10 @@ export default function BlogId() {
   const [postById, setPostById] = useState<Post | null>(null);
   const { data: session } = useSession();
 
+  const handleGotoTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const posts = await getPostById(params.id);
@@ -45,7 +51,7 @@ export default function BlogId() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="mx-[97px]">
+      <div className="lg:mx-[97px] md:mx-20">
         <img
           src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
           alt=""
@@ -56,7 +62,9 @@ export default function BlogId() {
         <p className="text-3xl font-semibold">{postById?.title}</p>
         <div className="flex gap-3">
           <p className="font-semibold ">Written by {postById?.author}</p>
-          <p>{postById?.createdAt && formatDate(postById.createdAt)}</p>
+          <p className="text-gray-400">
+            {postById?.createdAt && formatDate(postById.createdAt)}
+          </p>
         </div>
         <hr />
 
@@ -74,6 +82,15 @@ export default function BlogId() {
             <Comment postId={params.id} />
           </div>
         </div>
+      </div>
+
+      <div className="fixed right-10 bottom-16">
+        <button
+          onClick={handleGotoTop}
+          className={`bg-primary p-2 rounded-full text-white w-[50px] h-[50px]`}
+        >
+          <FontAwesomeIcon icon={faArrowTurnUp} size="xl" color="white" />
+        </button>
       </div>
     </div>
   );

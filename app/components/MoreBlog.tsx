@@ -29,7 +29,7 @@ export const MoreBlog: React.FC<Props> = ({ allPost }) => {
 
   return (
     <div>
-      {!morePost ? <div className="text-end">
+      {!morePost ? <div className="lg:text-end sm:text-end xs:text-center">
         <Button
           onClick={handleMorePost}
           title="See more"
@@ -42,7 +42,7 @@ export const MoreBlog: React.FC<Props> = ({ allPost }) => {
           {allPost.map((post, index) => (
             <Link href={`/blog/${post._id}`} key={`${post._id}` + index}>
               <div
-                className={`border shadow-md hover:shadow-lg transition w-[300px] `}
+                className={`border shadow-md hover:shadow-lg transition`}
               >
                 <div>
                   <img

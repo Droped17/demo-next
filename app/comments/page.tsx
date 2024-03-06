@@ -4,25 +4,24 @@ import React , { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Props {
-  postId?: string;
+  postId: string;
 }
 
-interface Comments {
-  postId?: string;
-  avatar?: string;
-  name?: string;
-  createdAt?: string;
-  title?: string;
+interface Comment {
+  postId: string;
+  avatar: string;
+  name: string;
+  createdAt: string;
+  title: string;
 }
 
-export default function Comment(props: Props | Comments){
-  const {postId,avatar,name,createdAt,title} = {...props,avatar: "",name:"",createdAt:"",title:""}
-  const [allComment, setAllComment] = useState<Comments[]>([]);
+const Comment: React.FC<Props> = ({ postId }) => {
+  const [allComment, setAllComment] = useState<Comment[]>([]);
 
   useEffect(() => {
     const getAllComment = async () => {
       try {
-        const response = await axios.get<{ allComment: Comments[] }>("http://localhost:3000/api/comment");
+        const response = await axios.get<{ allComment: Comment[] }>("http://localhost:3000/api/comment");
         setAllComment(response.data.allComment);
       } catch (error) {
         console.log(error);
@@ -56,3 +55,4 @@ export default function Comment(props: Props | Comments){
   );
 };
 
+export default Comment;
