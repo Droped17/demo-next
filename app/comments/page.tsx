@@ -4,24 +4,25 @@ import React , { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Props {
-  postId: string;
+  postId?: string;
 }
 
-interface MyComment {
-  postId: string;
-  avatar: string;
-  name: string;
-  createdAt: string;
-  title: string;
+interface Comments {
+  postId?: string;
+  avatar?: string;
+  name?: string;
+  createdAt?: string;
+  title?: string;
 }
 
-export default function Comment(props: Props | MyComment) {
-  const [allComment, setAllComment] = useState<MyComment[]>([]);
+export default function Comment(props: Props | Comments){
+  const {postId,avatar,name,createdAt,title} = {...props,avatar: "",name:"",createdAt:"",title:""}
+  const [allComment, setAllComment] = useState<Comments[]>([]);
 
   useEffect(() => {
     const getAllComment = async () => {
       try {
-        const response = await axios.get<{ allComment: MyComment[] }>("http://localhost:3000/api/comment");
+        const response = await axios.get<{ allComment: Comments[] }>("http://localhost:3000/api/comment");
         setAllComment(response.data.allComment);
       } catch (error) {
         console.log(error);
@@ -35,7 +36,7 @@ export default function Comment(props: Props | MyComment) {
     <div>
       {allComment.map((comment, index) => (
         <div key={`${comment.postId} ${index}`}>
-          {props.postId === comment.postId ? (
+          {postId === comment.postId ? (
             <div className="border-l-8 border-secondary p-1 bg-gray-100 rounded-md mt-3">
               <div className="flex gap-2 items-center">
                 <img
