@@ -44,7 +44,7 @@ export default function BlogId() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <div className="mx-[97px]">
         <img
           src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
@@ -62,7 +62,7 @@ export default function BlogId() {
 
         <p>{postById?.detail}</p>
 
-        <div className="p-5 border bg-gray-200">
+        <div className="p-5 border bg-gray-200 my-5">
           <p>Comment</p>
           {session && (
             <div className="mt-2">
@@ -75,6 +75,6 @@ export default function BlogId() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

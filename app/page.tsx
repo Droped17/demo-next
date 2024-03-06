@@ -57,10 +57,10 @@ export default async function Home() {
 
       <article>{session && <PostForm session={session} />}</article>
 
-      <article className="my-[43px] sm:mx-5 md:mx-10 lg:mx-32">
+      <article className="sm:mx-5 md:mx-10 lg:mx-32">
         {/* <div>{postMoreRender}</div> */}
 
-        <div className="my-2 grid gap-x-[33px] gap-y-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 justify-items-center">
+        <div className="my-2 grid gap-x-[33px] gap-y-[45px] lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 justify-items-center">
           {allPost.length !== 0
             ? allPost.slice(0, 5).map((post, index) => (
                 <Link
@@ -68,7 +68,7 @@ export default async function Home() {
                   key={`${post._id}` + index}
                   className={`${
                     index === 0 || index === 4
-                      ? "border col-span-full w-full object-cover overflow-hidden"
+                      ? "border shadow-md hover:shadow-lg transition col-span-full w-full object-cover overflow-hidden"
                       : "lg:col-span-1 md:col-span-2 sm:col-span-2 xs:col-span-3 w-[300px]  border shadow-md hover:shadow-lg transition"
                   }`}
                 >
@@ -78,7 +78,7 @@ export default async function Home() {
                         index === 0 || index === 4
                           ? "flex lg:flex-row-reverse md:flex-row-reverse sm:flex-row-reverse xs:flex-col items-center"
                           : "flex flex-col gap-3"
-                      } ${index === 0 || index === 4 ? "bg-gray-blog lg:flex-row-reverse md:flex-row-reverse sm:flex-row-reverse xs:flex-col" : ""}`}
+                      } ${index === 4 ? "bg-gray-blog lg:flex-row-reverse md:flex-row-reverse sm:flex-row-reverse xs:flex-col" : ""}`}
                     >
                       <div className="flex-1">
                         <img
@@ -87,7 +87,7 @@ export default async function Home() {
                           className="object-cover"
                         />
                       </div>
-                      <div className={`${index === 0 || index === 4 ? "px-10" : "p-2"}`}>
+                      <div className={`flex-1 ${index === 0 || index === 4 ? "px-10" : "p-2"}`}>
                         <div className="flex flex-col gap-3">
                         <p className={`${index === 0 || index === 4 ? "text-4xl": "text-xl"} font-bold`}>{post.title}</p>
                         <p className="w-full">
@@ -109,7 +109,7 @@ export default async function Home() {
             : null}
         </div>
 
-        <section className="mt-[43px]">
+        <section className="my-[43px]">
           <MoreBlog allPost={postMoreRender} />
         </section>
         

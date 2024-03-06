@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React , { useState, useEffect } from "react";
 import axios from "axios";
 
 interface Props {
@@ -19,12 +19,10 @@ const Comment: React.FC<Props> = ({ postId }) => {
   const [allComment, setAllComment] = useState<Comment[]>([]);
 
   useEffect(() => {
-    const getAllComment = () => {
+    const getAllComment = async () => {
       try {
-        axios
-          .get("http://localhost:3000/api/comment")
-          .then((result) => setAllComment(result.data.allComment));
-
+        const response = await axios.get<{ allComment: Comment[] }>("http://localhost:3000/api/comment");
+        setAllComment(response.data.allComment);
       } catch (error) {
         console.log(error);
       }
