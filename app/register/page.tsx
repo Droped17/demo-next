@@ -1,4 +1,5 @@
 import RegisterForm from "./form";
+import { useRouter } from "next/router";
 
 export default function Register() {
   return (

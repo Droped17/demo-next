@@ -1,6 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react";
 import axios from "axios";
+import { useRouter } from 'next/navigation'
 
 interface FormData {
   username: string;
@@ -13,6 +14,8 @@ export default function RegisterForm() {
     password: "",
   });
 
+  const router = useRouter()
+
   const handleOnChange = (e: FormEvent) => {
     const target = e.target as HTMLInputElement;
     const value = target.value;
@@ -22,29 +25,33 @@ export default function RegisterForm() {
       [username]: value,
     }));
   };
+  
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    try {
-      e.preventDefault();
-      console.log(formData);
-      const res = await axios.post("/api/auth/Users", formData);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
+    // try {
+    //   e.preventDefault();
+    //   console.log(formData);
+    //   const res = await axios.post("/api/auth/Users", formData);
+    //   console.log(res.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    e.preventDefault();
+    const res = await fetch("/api/auth/Users", {
+      method: "POST",
+      body: JSON.stringify({
+        formData,
+        "content-type": "application/json",
+      }),
+    });
+
+    if (!res.ok) {
+      const response = await res.json();
+      console.error(response.message);
     }
 
-    // const res = await fetch("/api/auth/Users", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     formData,
-    //     "content-type": "application/json",
-    //   }),
-    // });
-
-    // if (!res.ok) {
-    //   const response = await res.json();
-    //   console.error(response.message);
-    // }
+    router.push('/');
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
