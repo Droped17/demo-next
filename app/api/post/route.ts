@@ -17,7 +17,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Get All post
 export async function GET() {
   try {
-    const allPost = await Post.find({}).sort({ createdAt: 1 });
+    const allPost = await Post.find({}).sort({ createdAt: -1 });
     return NextResponse.json({ message: "GET Success", allPost });
   } catch (error) {
     return NextResponse.json({ message: "Error", error });
