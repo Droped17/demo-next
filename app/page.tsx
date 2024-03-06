@@ -5,6 +5,8 @@ import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import { PostForm } from "./components/PostForm";
 import { MoreBlog } from "./components/MoreBlog";
+import BannerHomePage from "./components/homepage/BannerHomePage";
+import BlogHomePage from "./components/homepage/BlogHomePage";
 
 // Server Component
 interface Post {
@@ -43,23 +45,13 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col gap-[39px]">
-      <article className="flex xs:flex-col-reverse sm:flex-col-reverse md:flex-row lg:flex-row bg-grey-color h-[467px]">
-        <div className="flex-1 flex flex-wrap flex-col items-center justify-center">
-          <div className="flex flex-col flex-wrap">
-            <p className="text-4xl font-bold">Make better coffee</p>
-            <p className="text-xl text-gray-300">why learn how to blog?</p>
-          </div>
-        </div>
-        <div className="flex-1 flex justify-center items-center">
-          <img src="/images/asd.png" alt="" className="h-[323px] w-[476px]" />
-        </div>
-      </article>
-
+      <BannerHomePage />
+      
       <article>{session && <PostForm session={session} />}</article>
 
-      <article className="sm:mx-5 md:mx-10 lg:mx-32">
-        {/* <div>{postMoreRender}</div> */}
+      <BlogHomePage allPost={allPost} postMoreRender={postMoreRender}/>
 
+      {/* <article className="sm:mx-5 md:mx-10 lg:mx-32">
         <div className="my-2 grid gap-x-[33px] gap-y-[45px] lg:grid-cols-3 md:grid-cols-6 sm:grid-cols-4 xs:grid-cols-3 justify-items-center">
           {allPost.length !== 0
             ? allPost.slice(0, 5).map((post, index) => (
@@ -113,7 +105,7 @@ export default async function Home() {
           <MoreBlog allPost={postMoreRender} />
         </section>
         
-      </article>
+      </article> */}
     </main>
   );
 }

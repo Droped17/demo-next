@@ -42,7 +42,7 @@ export const MoreBlog: React.FC<Props> = ({ allPost }) => {
           {allPost.map((post, index) => (
             <Link href={`/blog/${post._id}`} key={`${post._id}` + index}>
               <div
-                className={`border shadow-md hover:shadow-lg transition`}
+                className={`border shadow-md hover:shadow-xl transition`}
               >
                 <div>
                   <img

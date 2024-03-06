@@ -27,8 +27,8 @@ export default function RegisterForm() {
     try {
       e.preventDefault();
       console.log(formData);
-      // const res = await axios.post("/api/auth/Users", formData);
-      // console.log(res.data);
+      const res = await axios.post("/api/auth/Users", formData);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
