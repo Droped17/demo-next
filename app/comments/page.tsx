@@ -3,11 +3,11 @@
 import React , { useState, useEffect } from "react";
 import axios from "axios";
 
-type  Props = {
+interface Props {
   postId: string;
 }
 
-interface Comment {
+interface MyComment {
   postId: string;
   avatar: string;
   name: string;
@@ -15,13 +15,13 @@ interface Comment {
   title: string;
 }
 
-const Comment: React.FC<Props> = ({ postId }) => {
-  const [allComment, setAllComment] = useState<Comment[]>([]);
+export default function Comment(props: Props | MyComment) {
+  const [allComment, setAllComment] = useState<MyComment[]>([]);
 
   useEffect(() => {
     const getAllComment = async () => {
       try {
-        const response = await axios.get<{ allComment: Comment[] }>("http://localhost:3000/api/comment");
+        const response = await axios.get<{ allComment: MyComment[] }>("http://localhost:3000/api/comment");
         setAllComment(response.data.allComment);
       } catch (error) {
         console.log(error);
@@ -35,7 +35,7 @@ const Comment: React.FC<Props> = ({ postId }) => {
     <div>
       {allComment.map((comment, index) => (
         <div key={`${comment.postId} ${index}`}>
-          {postId === comment.postId ? (
+          {props.postId === comment.postId ? (
             <div className="border-l-8 border-secondary p-1 bg-gray-100 rounded-md mt-3">
               <div className="flex gap-2 items-center">
                 <img
@@ -55,4 +55,3 @@ const Comment: React.FC<Props> = ({ postId }) => {
   );
 };
 
-export default Comment;
