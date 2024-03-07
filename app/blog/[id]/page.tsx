@@ -4,11 +4,11 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import Comment from "@/app/comments/page";
 import { BlogForm } from "../form";
 import { formatDate } from "@/lib/formatDate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTurnUp } from "@fortawesome/free-solid-svg-icons";
+import Comment from "@/app/components/Comment";
 
 const getPostById = async (params: any) => {
   try {
@@ -47,7 +47,7 @@ export default function BlogId() {
       console.log(postById);
     };
     fetchData();
-  }, []);
+  }, [params.id,postById]);
 
   return (
     <div className="flex flex-col gap-4">

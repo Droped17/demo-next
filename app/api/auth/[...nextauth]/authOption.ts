@@ -58,9 +58,10 @@ const authOptions: AuthOptions = {
               console.log("Good Pass");
               delete foundUser.password;
               console.log(`CREDENTIAL:===>`, { credentials });
-              return {
-                name: foundUser.username,
-              };
+              // return {
+              //   name: foundUser.username,
+              // };
+              return foundUser;
             }
           }
         } catch (error) {

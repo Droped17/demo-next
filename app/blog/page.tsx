@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
-import { PostForm } from "../components/PostForm";
+import PostForm  from "../components/PostForm";
 import { options } from "../api/auth/[...nextauth]/options";
 import { BlogForm } from "./form";
 import axios from "axios";
-import Comment from "../comments/page";
+import Comment from "../components/Comment";
 
 interface Post {
   _id: string;

@@ -15,7 +15,7 @@ interface Comment {
   title: string;
 }
 
-const Comment: React.FC<Props> = ({ postId }) => {
+export default function Comment({postId}: Props) {
   const [allComment, setAllComment] = useState<Comment[]>([]);
 
   useEffect(() => {
@@ -55,4 +55,3 @@ const Comment: React.FC<Props> = ({ postId }) => {
   );
 };
 
-export default Comment;
