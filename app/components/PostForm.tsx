@@ -36,6 +36,10 @@ export const PostForm: React.FC<Props> = ({ session }) => {
     try {
       e.preventDefault();
       console.log(formData);
+      if (formData.title.trim() === '' || formData.detail.trim() === '') {
+        alert('Please fill in all required fields.');
+        return; // Prevent further execution
+      }
       const res = await axios.post("/api/post",{formData});
       console.log(res.data);
 

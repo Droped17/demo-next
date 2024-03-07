@@ -33,6 +33,10 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
   const handleSubmit = async (e: FormEvent) => {
     try {
       e.preventDefault();
+      if (formData.title.trim() === '') {
+        alert('Please fill in all required fields.');
+        return; // Prevent further execution
+      }
       axios
         .post("http://localhost:3000/api/comment", { formData })
         .then((result) => console.log(result.data));

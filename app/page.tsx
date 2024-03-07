@@ -1,10 +1,7 @@
 import axios from "axios";
-import Link from "next/link";
-import { formatDate } from "@/lib/formatDate";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import { PostForm } from "./components/PostForm";
-import { MoreBlog } from "./components/MoreBlog";
 import BannerHomePage from "./components/homepage/BannerHomePage";
 import BlogHomePage from "./components/homepage/BlogHomePage";
 
@@ -46,10 +43,10 @@ export default async function Home() {
   return (
     <main className="flex flex-col gap-[39px]">
       <BannerHomePage />
-      
+
       <article>{session && <PostForm session={session} />}</article>
 
-      <BlogHomePage allPost={allPost} postMoreRender={postMoreRender}/>
+      <BlogHomePage allPost={allPost} postMoreRender={postMoreRender} />
 
       {/* <article className="sm:mx-5 md:mx-10 lg:mx-32">
         <div className="my-2 grid gap-x-[33px] gap-y-[45px] lg:grid-cols-3 md:grid-cols-6 sm:grid-cols-4 xs:grid-cols-3 justify-items-center">
