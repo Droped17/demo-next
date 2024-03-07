@@ -47,7 +47,7 @@ export default function BlogId() {
       console.log(postById);
     };
     fetchData();
-  }, [params.id,postById]);
+  }, []);
 
   return (
     <div className="flex flex-col gap-4">
