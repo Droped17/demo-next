@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
-import { PostForm } from "./components/PostForm";
+import PostForm from "./components/PostForm";
 import BannerHomePage from "./components/homepage/BannerHomePage";
 import BlogHomePage from "./components/homepage/BlogHomePage";
 

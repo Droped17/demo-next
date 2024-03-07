@@ -97,7 +97,6 @@
 
 "use client";
 
-import axios from "axios";
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import registerSchema from "../validate/register-validate";
@@ -105,6 +104,7 @@ import registerSchema from "../validate/register-validate";
 interface FormData {
   username: string;
   password: string;
+  confirmPassword: string
 }
 
 interface ValidationError {
@@ -132,6 +132,7 @@ export default function RegisterPage() {
   const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
+    confirmPassword:""
   });
 
   const [checkError, setCheckError] = useState<ValidationError>({});
@@ -179,7 +180,7 @@ export default function RegisterPage() {
         className={`border p-3 ${
           checkError.username ? "border-red-500 " : ""
         }`}
-        placeholder="firstName"
+        placeholder="username"
         name="username"
         onChange={handleOnChange}
         value={formData.username}
@@ -198,7 +199,7 @@ export default function RegisterPage() {
       {checkError.password && (
         <span className="text-red-500">{checkError.password}</span>
       )}
-      {/* <input
+      <input
         type="password"
         className={`border p-3 ${
           checkError.confirmPassword ? "border-red-500 " : ""
@@ -210,9 +211,9 @@ export default function RegisterPage() {
       />
       {checkError.confirmPassword && (
         <span className="text-red-500">{checkError.confirmPassword}</span>
-      )} */}
+      )}
 
-      <button className="bg-black text-white px-4 py-3">Register</button>
+      <button className="bg-primary hover:bg-primary-hover transition rounded-full text-white px-4 py-3">Register</button>
     </form>
   );
 }

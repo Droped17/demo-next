@@ -12,7 +12,7 @@ const registerSchema = Joi.object({
     .max(50)
     .pattern(/^[a-zA-Z0-9]{6,30}$/)
     .required(),
-//   confirmPassword: Joi.string().valid(Joi.ref("password")).trim().required(),
+  confirmPassword: Joi.string().valid(Joi.ref("password")).trim().required(),
 });
 
 export default registerSchema;

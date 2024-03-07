@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { Button } from "./Button";
 import Link from "next/link";
 import { formatDate } from "@/lib/formatDate";
@@ -18,9 +18,10 @@ interface Props {
   allPost: Post[];
 }
 
-export const MoreBlog: React.FC<Props> = ({ allPost }) => {
+export default function MoreBlog({ allPost }: Props) {
   //   console.log(allPost);
-  const [morePost, setMorePost] = useState(false);
+
+  const [morePost, setMorePost] = useState<boolean>(false);
 
   const handleMorePost = (e: FormEvent) => {
     e.preventDefault();
@@ -29,21 +30,21 @@ export const MoreBlog: React.FC<Props> = ({ allPost }) => {
 
   return (
     <div>
-      {!morePost ? <div className="lg:text-end sm:text-end xs:text-center">
-        <Button
-          onClick={handleMorePost}
-          title="See more"
-          style={`bg-primary text-white px-2 py-1 rounded-md`}
-        />
-      </div> : null}
+      {!morePost ? (
+        <div className="lg:text-end sm:text-end xs:text-center">
+          <Button
+            onClick={handleMorePost}
+            title="See more"
+            style={`bg-primary hover:bg-primary-hover text-white px-3 py-2 rounded-md`}
+          />
+        </div>
+      ) : null}
 
       {morePost && (
         <div className="my-2 grid gap-x-[33px] gap-y-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 justify-items-center">
           {allPost.map((post, index) => (
             <Link href={`/blog/${post._id}`} key={`${post._id}` + index}>
-              <div
-                className={`border shadow-md hover:shadow-xl transition`}
-              >
+              <div className={`border shadow-md hover:shadow-xl transition`}>
                 <div>
                   <img
                     src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
@@ -70,4 +71,4 @@ export const MoreBlog: React.FC<Props> = ({ allPost }) => {
       )}
     </div>
   );
-};
+}

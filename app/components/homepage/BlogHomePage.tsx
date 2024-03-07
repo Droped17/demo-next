@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { formatDate } from "@/lib/formatDate";
 import Post from "@/app/models/Post";
-import { MoreBlog } from "../MoreBlog";
+import MoreBlog  from "../MoreBlog";
 
 interface Post {
   _id: string;

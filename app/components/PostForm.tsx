@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import React,{ FormEvent, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
 
@@ -15,15 +15,10 @@ interface FormData {
   avatar: string;
   createdAt: Date;
 }
-export const PostForm: React.FC<Props> = ({ session }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  // console.log(session);
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-    console.log(isOpen);
-  };
+const currentDate: Date = new Date();
 
-  const currentDate: Date = new Date();
+export default function PostForm({session}:Props){
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     author: session.user.name || session.user.email || "anonymous",
     title: "",
@@ -31,6 +26,12 @@ export const PostForm: React.FC<Props> = ({ session }) => {
     avatar: "",
     createdAt: currentDate,
   });
+  // console.log(session);
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+    console.log(isOpen);
+  };
+
 
   const handleSubmit = async (e: FormEvent) => {
     try {
@@ -89,12 +90,12 @@ export const PostForm: React.FC<Props> = ({ session }) => {
               <Button
                 onClick={handleOpen}
                 title="Cancel"
-                style="text-white bg-gradient-to-r from-gray-300 via-gray-400 to-gray-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 shadow-lg shadow-gray-500/50 dark:shadow-lg dark:shadow-gray-300/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                style="inline-block rounded-lg bg-gray-400 px-5 py-2.5  text-md text-white shadow-dark-3 transition duration-150 ease-in-out hover:bg-gray-500 hover:shadow-dark-2 focus:bg-gray-700 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-dark-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
               />
               <Button
                 onClick={handleSubmit}
                 title="Post"
-                style="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                style="inline-block rounded-lg bg-green-500 px-5 py-2.5  text-md text-white shadow-dark-3 transition duration-150 ease-in-out hover:bg-green-700 hover:shadow-dark-2 focus:bg-green-700 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:bg-green-900 active:shadow-dark-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
               />
             </div>
           </form>
