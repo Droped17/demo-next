@@ -1,24 +1,22 @@
 import Post from "@/app/models/Post";
 import { NextRequest, NextResponse } from "next/server";
-
-
-// HTTP handler function
-// export async function handler(req: NextRequest) {
-//   const searchParams = req.nextUrl.searchParams;
-//   const postId = searchParams.get("postId");
-
-//   if (postId) {
-//     return GET_id(req);
-//   } else {
-//     return GET();
-//   }
-// }
+// import { limiter } from "../config/limiter";
 
 // Get All post
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // const remaining = await limiter.removeTokens(1);
+    // console.log(remaining);
+    // const origin =  request.headers.get('origin');
     const allPost = await Post.find({}).sort({ createdAt: -1 });
-    return NextResponse.json({ message: "GET Success", allPost });
+    // return new NextResponse(JSON.stringify(allPost),{
+    //   headers: {
+    //     'Access-Control-Allow-Origin': origin || "*",
+    //     'Content-Type': 'application/json',
+    //   }
+    // });
+
+    return NextResponse.json({message:"get post",allPost});
   } catch (error) {
     return NextResponse.json({ message: "Error", error });
   }
