@@ -38,7 +38,7 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
         return; // Prevent further execution
       }
       axios
-        .post("http://localhost:3000/api/comment", { formData })
+        .post("https://demo-next-jk36.vercel.app/api/comment", { formData })
         .then((result) => console.log(result.data));
       window.location.reload();
     } catch (error) {
