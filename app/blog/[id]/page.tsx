@@ -9,6 +9,7 @@ import { formatDate } from "@/lib/formatDate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTurnUp } from "@fortawesome/free-solid-svg-icons";
 import Comment from "@/app/components/Comment";
+import Image from "next/image";
 
 const getPostById = async (params: any) => {
   try {
@@ -47,16 +48,26 @@ export default function BlogId() {
       console.log(postById);
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="flex flex-col gap-4">
       <div className="lg:mx-[97px] md:mx-20">
-        <img
+        
+          <Image
+            alt="blog-img"
+            src={"/images/michael-sum-LEpfefQf4rU-unsplash.webp"}
+            width={2560}
+            height={200}
+            style={{ height: '40vh', width: '100%',objectFit:"cover" }}
+          />
+    
+        {/* <img
           src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
           alt=""
           className="w-full max-h-[40vh] object-cover"
-        />
+        /> */}
       </div>
       <div className="flex flex-col gap-2 lg:mx-32 sm:mx-20">
         <p className="text-3xl font-semibold">{postById?.title}</p>
