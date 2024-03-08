@@ -20,26 +20,26 @@
 
 // export default connect;
 
-require('dotenv').config();
-import mongoose from 'mongoose';
+// require('dotenv').config();
+// import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+// const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!MONGODB_URI) {
-  throw new Error('MongoDB URI is not defined in the environment variables.');
-}
+// if (!MONGODB_URI) {
+//   throw new Error('MongoDB URI is not defined in the environment variables.');
+// }
 
-const connect = async () => {
-  try {
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('Mongo Connection successfully established.');
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error.message);
-    throw new Error('Error connecting to MongoDB');
-  }
-};
+// const connect = async () => {
+//   try {
+//     await mongoose.connect(MONGODB_URI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     console.log('Mongo Connection successfully established.');
+//   } catch (error) {
+//     console.error('Error connecting to MongoDB:', error.message);
+//     throw new Error('Error connecting to MongoDB');
+//   }
+// };
 
-export default connect;
+// export default connect;
