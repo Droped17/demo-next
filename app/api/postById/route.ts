@@ -15,6 +15,7 @@ export async function GET(req:NextRequest){
       return NextResponse.json({message: `Ok happy`,foundPost});
       // const postById = await Post.findById({})
     } catch (error) {
-      return  NextResponse.json({message: `Error`});
+      const searchParams = req.nextUrl.searchParams;
+      return  NextResponse.json({message: `Error`,searchParams});
     }
   }
