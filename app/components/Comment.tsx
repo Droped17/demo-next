@@ -15,14 +15,14 @@ interface Comment {
 
 const getAllComment = async (postId: string) => {
   try {
-    const response = await axios.get<{ foundComment: Comment[] }>(
+    const response = await axios.get(
       `/api/commentById?postId=${postId}`
     );
     // console.log(response.data);
     return response.data.foundComment;
   } catch (error) {
     console.log(error);
-    return []; // Return an empty array in case of error
+    return []; 
   }
 };
 
@@ -38,7 +38,7 @@ export default function Comment({ postId }: Props) {
       }
     };
     fetchData();
-  }, [postId]);
+  }, []);
 
   return (
     <div>
