@@ -14,7 +14,7 @@ import Image from "next/image";
 const getPostById = async (params: any) => {
   try {
     const res = await axios.get(
-      `/api/postById/?postId=${params}`
+      `https://demo-next-jk36.vercel.app/api/postById/?postId=${params}`
     );
     return res.data.foundPost;
   } catch (error) {
