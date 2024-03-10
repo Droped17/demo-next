@@ -11,15 +11,15 @@ import { faArrowTurnUp } from "@fortawesome/free-solid-svg-icons";
 import Comment from "@/app/components/Comment";
 import Image from "next/image";
 
-const getPostById = async (params: any) => {
+const getPostById = async (postId: any) => {
   try {
     const res = await axios.get(
-      `https://demo-next-jk36.vercel.app/api/postById/?postId=${params}`
+      `https://demo-next-jk36.vercel.app/api/postById/?postId=${postId}`
     );
     return res.data.foundPost;
   } catch (error) {
     console.error("Error fetching posts:", error);
-    return [];
+    return null;
   }
 };
 
@@ -43,9 +43,12 @@ export default function BlogId() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const posts = await getPostById(params.id);
-      setPostById(posts);
-      console.log(postById);
+      try {
+        const post = await getPostById(params.id);
+        setPostById(post);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      }
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,15 +57,14 @@ export default function BlogId() {
   return (
     <div className="flex flex-col gap-4">
       <div className="lg:mx-[97px] md:mx-20">
-        
-          <Image
-            alt="blog-img"
-            src={"/images/michael-sum-LEpfefQf4rU-unsplash.webp"}
-            width={2560}
-            height={200}
-            style={{ height: '40vh', width: '100%',objectFit:"cover" }}
-          />
-    
+        <Image
+          alt="blog-img"
+          src={"/images/michael-sum-LEpfefQf4rU-unsplash.webp"}
+          width={2560}
+          height={200}
+          style={{ height: "40vh", width: "100%", objectFit: "cover" }}
+        />
+
         {/* <img
           src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
           alt=""
