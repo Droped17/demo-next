@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 // Get Comment By Id
 export async function GET(req: NextRequest) {
     try {
-        const allComment = await Comments.find({});
+        const allComment = await Comments.find();
         return NextResponse.json({ message: "GET Success", allComment });
       } catch (error) {
     return NextResponse.json({ message: "Error", error });

@@ -92,7 +92,7 @@ export default function BlogId() {
           )}
 
           <div className="">
-            <Comment postId={params.id} />
+            <Comment postId={params.id}/>
           </div>
         </div>
       </div>
