@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -15,23 +13,32 @@ interface Comment {
   title: string;
 }
 
+const getAllComment = async (postId: string) => {
+  try {
+    const response = await axios.get<{ foundComment: Comment[] }>(
+      `/api/commentById?postId=${postId}`
+    );
+    // console.log(response.data);
+    return response.data.foundComment;
+  } catch (error) {
+    console.log(error);
+    return []; // Return an empty array in case of error
+  }
+};
+
 export default function Comment({ postId }: Props) {
-  const [allComment, setAllComment] = useState<Comment[]>([]);
+  const [allComment, setAllComment] = useState<Comment[]>([]); 
   useEffect(() => {
-    const getAllComment = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get<{ foundComment: Comment[] }>(
-          `/api/commentById?postId=${postId}`
-        );
-        console.log(response.data);
-        setAllComment(response.data.foundComment);
+        const post = await getAllComment(postId);
+        setAllComment(post);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching post:", error);
       }
     };
-
-    getAllComment();
-  }, []);
+    fetchData();
+  }, [postId]);
 
   return (
     <div>
