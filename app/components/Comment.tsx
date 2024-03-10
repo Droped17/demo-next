@@ -42,7 +42,7 @@ export default function Comment({ postId }: Props) {
 
   return (
     <div>
-      {allComment.map((comments, index) => (
+      {allComment && allComment.map((comments, index) => (
         <div key={`${comments.postId}-${index}`}>
           <div className="border-l-8 border-secondary p-1 bg-gray-100 rounded-md mt-3">
             <div className="flex gap-2 items-center">
