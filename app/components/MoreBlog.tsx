@@ -47,7 +47,7 @@ export default function MoreBlog({ allPost }: Props) {
               <div className={`border shadow-md hover:shadow-xl transition`}>
                 <div>
                   <img
-                    src="/images/michael-sum-LEpfefQf4rU-unsplash.webp"
+                    src="https://images.pexels.com/photos/15022089/pexels-photo-15022089.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt=""
                     className="object-cover"
                   />
