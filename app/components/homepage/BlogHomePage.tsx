@@ -48,7 +48,7 @@ const BlogHomePage: React.FC<Props> = ({ allPost, postMoreRender }) => {
                   <div className="flex-1">
                     <Image
                       alt="blog-img"
-                      src={"/images/michael-sum-LEpfefQf4rU-unsplash.webp"}
+                      src={"https://images.pexels.com/photos/15022089/pexels-photo-15022089.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
                       width={2500}
                       height={300}
                       style={{

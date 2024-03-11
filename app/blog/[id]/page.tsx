@@ -59,7 +59,7 @@ export default function BlogId() {
       <div className="lg:mx-[97px] md:mx-20">
         <Image
           alt="blog-img"
-          src={"/images/michael-sum-LEpfefQf4rU-unsplash.webp"}
+          src={"https://images.pexels.com/photos/768474/pexels-photo-768474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
           width={2560}
           height={200}
           style={{ height: "40vh", width: "100%", objectFit: "cover" }}
