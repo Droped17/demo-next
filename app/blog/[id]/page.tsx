@@ -14,7 +14,7 @@ import Image from "next/image";
 const getPostById = async (postId: any) => {
   try {
     const res = await axios.get(
-      `api/postById/?postId=${postId}` ||
+      `/api/postById/?postId=${postId}` ||
         `https://main--hotcoffeeblog.netlify.app/api/postById/?postId=${postId}`
     );
     return res.data.foundPost;
