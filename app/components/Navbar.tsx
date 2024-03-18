@@ -41,7 +41,7 @@ export default async function Navbar() {
               <FontAwesomeIcon icon={faLinkedin} size="xl" />
             </Link>
 
-            <Link href="/api/auth/signout">
+            <Link href="http://localhost:3000/api/auth/signout">
               <Button
                 onClick={null}
                 title="SignOut"

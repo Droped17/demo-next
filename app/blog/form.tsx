@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import axios from "axios";
-import moment from 'moment';
+import moment from "moment";
 
 interface Props {
   session: any;
@@ -24,7 +24,7 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
   // console.log(postId);
 
   // const currentDate: Date = new Date();
-  
+
   const [formData, setFormData] = useState<FormData>({
     postId: postId,
     name: session.user.name || session.user.email || "anonymous",
@@ -38,12 +38,16 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
   const handleSubmit = async (e: FormEvent) => {
     try {
       e.preventDefault();
-      if (formData.title.trim() === '') {
-        alert('Please fill in all required fields.');
+      if (formData.title.trim() === "") {
+        alert("Please fill in all required fields.");
         return; // Prevent further execution
       }
       axios
-        .post("https://demo-next-jk36.vercel.app/api/comment", { formData })
+        .post(
+          "https://hotcoffeeblog.netlify.app/api/comment" ||
+            `https://main--hotcoffeeblog.netlify.app/api/comment`,
+          { formData }
+        )
         .then((result) => console.log(result.data));
       window.location.reload();
     } catch (error) {

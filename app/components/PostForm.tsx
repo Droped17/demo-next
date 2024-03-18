@@ -1,9 +1,9 @@
 "use client";
 
-import React,{ FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
-import moment from 'moment';
+import moment from "moment";
 
 interface Props {
   session: any;
@@ -19,7 +19,7 @@ interface FormData {
 // const currentDate: Date = new Date();
 const date = moment().format();
 
-export default function PostForm({session}:Props){
+export default function PostForm({ session }: Props) {
   // console.log(date);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
@@ -35,16 +35,19 @@ export default function PostForm({session}:Props){
     console.log(isOpen);
   };
 
-
   const handleSubmit = async (e: FormEvent) => {
     try {
       e.preventDefault();
       // console.log(formData);
-      if (formData.title.trim() === '' || formData.detail.trim() === '') {
-        alert('Please fill in all required fields.');
+      if (formData.title.trim() === "" || formData.detail.trim() === "") {
+        alert("Please fill in all required fields.");
         return; // Prevent further execution
       }
-      const res = await axios.post("https://hotcoffeeblog.netlify.app/api/post",{formData});
+      const res = await axios.post(
+        "https://hotcoffeeblog.netlify.app/api/post" ||
+          `https://main--hotcoffeeblog.netlify.app/api/post`,
+        { formData }
+      );
       // console.log(res.data);
 
       // Wait Dialog
@@ -106,4 +109,4 @@ export default function PostForm({session}:Props){
       )}
     </div>
   );
-};
+}

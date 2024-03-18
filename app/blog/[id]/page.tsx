@@ -14,7 +14,8 @@ import Image from "next/image";
 const getPostById = async (postId: any) => {
   try {
     const res = await axios.get(
-      `https://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}`
+      `https://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}` ||
+        `https://main--hotcoffeeblog.netlify.app/api/postById/?postId=${postId}`
     );
     return res.data.foundPost;
   } catch (error) {
@@ -59,7 +60,9 @@ export default function BlogId() {
       <div className="lg:mx-[97px] md:mx-20">
         <Image
           alt="blog-img"
-          src={"https://images.pexels.com/photos/768474/pexels-photo-768474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
+          src={
+            "https://images.pexels.com/photos/768474/pexels-photo-768474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          }
           width={2560}
           height={200}
           style={{ height: "40vh", width: "100%", objectFit: "cover" }}
@@ -92,7 +95,7 @@ export default function BlogId() {
           )}
 
           <div className="">
-            <Comment postId={params.id}/>
+            <Comment postId={params.id} />
           </div>
         </div>
       </div>
