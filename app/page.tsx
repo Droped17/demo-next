@@ -17,7 +17,7 @@ interface Post {
 
 const getAllPost = async () => {
   try {
-    const res = await axios.get("https://demo-next-jk36.vercel.app/api/post");
+    const res = await axios.get("https://hotcoffeeblog.netlify.app/api/post");
     // console.log(res.data);
     return res.data.allPost;
   } catch (error) {

@@ -3,6 +3,7 @@
 import React,{ FormEvent, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
+import moment from 'moment';
 
 interface Props {
   session: any;
@@ -13,18 +14,20 @@ interface FormData {
   title: string;
   detail: string;
   avatar: string;
-  createdAt: Date;
+  createdAt: string;
 }
-const currentDate: Date = new Date();
+// const currentDate: Date = new Date();
+const date = moment().format();
 
 export default function PostForm({session}:Props){
+  // console.log(date);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     author: session.user.name || session.user.email || "anonymous",
     title: "",
     detail: "",
     avatar: "",
-    createdAt: currentDate,
+    createdAt: date,
   });
   // console.log(session);
   const handleOpen = () => {
@@ -36,13 +39,13 @@ export default function PostForm({session}:Props){
   const handleSubmit = async (e: FormEvent) => {
     try {
       e.preventDefault();
-      console.log(formData);
+      // console.log(formData);
       if (formData.title.trim() === '' || formData.detail.trim() === '') {
         alert('Please fill in all required fields.');
         return; // Prevent further execution
       }
-      const res = await axios.post("/api/post",{formData});
-      console.log(res.data);
+      const res = await axios.post("https://hotcoffeeblog.netlify.app/api/post",{formData});
+      // console.log(res.data);
 
       // Wait Dialog
       window.location.reload();

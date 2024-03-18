@@ -87,7 +87,7 @@ export default function Comment({ postId }: Props) {
     const getAllComment = async () => {
       try {
         const response = await axios.get<{ allComment: Comment[] }>(
-          "/api/comment"
+          "https://hotcoffeeblog.netlify.app/api/comment"
         );
         setAllComment(response.data.allComment);
       } catch (error) {
@@ -105,19 +105,19 @@ export default function Comment({ postId }: Props) {
           {postId === comment.postId ? (
             <div className="border-l-8 border-secondary p-1 bg-gray-100 rounded-md mt-3">
               <div className="flex gap-2 items-center">
-                {/* <Image
+                <Image
                   alt="comment-img"
                   src={comment.avatar}
                   width={30}
                   height={30}
                   className="rounded-full"
-                /> */}
-                <img
+                />
+                {/* <img
                   src={comment.avatar}
                   alt=""
                   width={30}
                   className="rounded-full"
-                />
+                /> */}
                 <p className="font-bold">{comment.name}</p>
               </div>
               <p>{comment.title}</p>
