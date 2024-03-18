@@ -72,6 +72,11 @@ const authOptions: AuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async redirect({url, baseUrl}) {
+      return url.startsWith(baseUrl) ? url : baseUrl;
+    },
+  },
   session: {
     strategy: "jwt",
   },
