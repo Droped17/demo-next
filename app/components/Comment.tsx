@@ -87,7 +87,7 @@ export default function Comment({ postId }: Props) {
     const getAllComment = async () => {
       try {
         const response = await axios.get<{ allComment: Comment[] }>(
-          "https://hotcoffeeblog.netlify.app/api/comment"
+          "/api/comment"
         );
         setAllComment(response.data.allComment);
       } catch (error) {

@@ -44,7 +44,7 @@ export default function PostForm({ session }: Props) {
         return; // Prevent further execution
       }
       const res = await axios.post(
-        "https://hotcoffeeblog.netlify.app/api/post" ||
+        "/api/post" ||
           `https://main--hotcoffeeblog.netlify.app/api/post`,
         { formData }
       );
