@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import axios from "axios";
+import moment from 'moment';
 
 interface Props {
   session: any;
@@ -13,13 +14,17 @@ interface FormData {
   name: string;
   title: string;
   avatar: string;
-  createdAt: Date;
+  createdAt: string;
 }
+
+const date = moment().format();
+
 export const BlogForm: React.FC<Props> = ({ session, postId }) => {
   // console.log(`SESSION====> `, session);
   // console.log(postId);
 
-  const currentDate: Date = new Date();
+  // const currentDate: Date = new Date();
+  
   const [formData, setFormData] = useState<FormData>({
     postId: postId,
     name: session.user.name || session.user.email || "anonymous",
@@ -27,7 +32,7 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
     avatar: session.user.name
       ? "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1088.jpg"
       : "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1150.jpg",
-    createdAt: currentDate,
+    createdAt: date,
   });
 
   const handleSubmit = async (e: FormEvent) => {
