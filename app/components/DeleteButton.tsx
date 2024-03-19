@@ -22,7 +22,7 @@ export default function DeleteBlogButton() {
     // Redirect to "/"
 
     axios
-      .delete(`https://hotcoffeeblog.netlify.app/api/post/?postId=${id}`)
+      .delete(`https://hotcoffeeblog.netlify.app//api/post/?postId=${id}`)
       .then((res) => console.log(res.data));
     //     axios
     //   .delete(`/api/comment?postId=${id}`)

@@ -2,13 +2,14 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['images.pexels.com','cloudflare-ipfs.com'],
+    domains: ["images.pexels.com", "cloudflare-ipfs.com"],
   },
 
   async headers() {
     return [
       {
-        source: "/api/:path",
+        // matching all API routes
+        source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
