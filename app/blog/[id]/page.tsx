@@ -124,6 +124,7 @@ import Comment from "@/app/components/Comment";
 import Image from "next/image";
 import { Button } from "@/app/components/Button";
 import GoToTopButton from "@/app/components/GoToTopButton";
+import DeleteBlogButton from "@/app/components/DeleteButton";
 
 const getPostById = async (postId: any) => {
   try {
@@ -157,7 +158,7 @@ export default async function BlogId({ params }: { params: { id: string } }) {
   // const { data: session } = useSession();
 
   const session = await getServerSession(options);
-  // console.log(`SESSION IS :===> `,session);
+  console.log(`SESSION IS :===> `, session);
   // SSR
   // console.log(`SSR PARAM IS: ==> `,params);
   const post: Post = await getPostById(params.id);
@@ -192,12 +193,15 @@ export default async function BlogId({ params }: { params: { id: string } }) {
       </div>
       <div className="flex flex-col gap-2 lg:mx-32 sm:mx-20">
         <p className="text-3xl font-semibold">{post?.title}</p>
-        <div className="flex gap-3">
-          <p className="font-semibold ">Written by {post?.author}</p>
-          <p className="text-gray-400">
-            {/* {post?.createdAt && formatDate(post?.createdAt)} */}
-            {formattedCreatedAt}
-          </p>
+        <div className="flex justify-between">
+          <div className="flex gap-3">
+            <p className="font-semibold ">Written by {post?.author}</p>
+            <p className="text-gray-400">{formattedCreatedAt}</p>
+          </div>
+          {/* {post?.createdAt && formatDate(post?.createdAt)} */}
+          {session && session.user?.name === post.author ? (
+            <DeleteBlogButton />
+          ) : null}
         </div>
         <hr />
 
