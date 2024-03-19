@@ -57,7 +57,7 @@ export async function DELETE(req: NextRequest) {
     console.log(`ID: ==> `,postIdObject._id);
 
     // Perform the deletion
-    await Post.deleteOne({ _id: postIdObject });
+    const result = await Post.deleteOne({ _id: postIdObject });
 
     return NextResponse.json({ message: "Delete Success"});
   } catch (error) {
