@@ -25,6 +25,8 @@ export default function DeleteBlogButton() {
         `https://hotcoffeeblog.netlify.app/api/comment?postId=${id}`
       );
 
+      console.log(res.data);
+
       if (res.status === 200) {
         router.push("/");
       } else {
