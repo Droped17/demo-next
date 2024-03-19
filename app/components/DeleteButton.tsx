@@ -20,10 +20,19 @@ export default function DeleteBlogButton() {
 
   const handleConfirm = async () => {
     // Redirect to "/"
-    const res = await axios.delete(
-      `https://hotcoffeeblog.netlify.app/api/comment?postId=${id}`
-    );
-    router.push("/");
+    try {
+      const res = await axios.delete(
+        `https://hotcoffeeblog.netlify.app/api/comment?postId=${id}`
+      );
+
+      if (res.status === 200) {
+        router.push("/");
+      } else {
+        console.error("Error Deleting");
+      }
+    } catch (error) {
+      console.error(`Error`, error);
+    }
   };
 
   return (
