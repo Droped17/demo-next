@@ -127,12 +127,13 @@ import GoToTopButton from "@/app/components/GoToTopButton";
 
 const getPostById = async (postId: any) => {
   try {
+    console.log(postId);
     // const res = await axios.get(
-    //   `http://localhost:3000/api/postById/?postId=${postId}`
+    //   `http://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}`
     // );
     const res = await axios.get(
       `/api/postById/?postId=${postId}` ||
-        `https://main--hotcoffeeblog.netlify.app/api/postById/?postId=${postId}` 
+      `https://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}` 
         || `http://localhost:3000/api/postById/?postId=${postId}`
     );
     console.log(res.data.foundPost);

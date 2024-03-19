@@ -20,7 +20,7 @@ interface FormData {
 const date = moment().format();
 
 export default function PostForm({ session }: Props) {
-  // console.log(date);
+  console.log(date);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     author: session.user.name || session.user.email || "anonymous",
