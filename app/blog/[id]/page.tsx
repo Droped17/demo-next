@@ -199,9 +199,9 @@ export default async function BlogId({ params }: { params: { id: string } }) {
             <p className="text-gray-400">{formattedCreatedAt}</p>
           </div>
           {/* {post?.createdAt && formatDate(post?.createdAt)} */}
-          {session && session.user?.name === post.author ? (
+          {/* {session && session.user?.name === post.author ? (
             <DeleteBlogButton />
-          ) : null}
+          ) : null} */}
         </div>
         <hr />
 
