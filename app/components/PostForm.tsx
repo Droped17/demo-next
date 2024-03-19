@@ -32,7 +32,7 @@ export default function PostForm({ session }: Props) {
   // console.log(session);
   const handleOpen = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
+    // console.log(isOpen);
   };
 
   const handleSubmit = async (e: FormEvent) => {
