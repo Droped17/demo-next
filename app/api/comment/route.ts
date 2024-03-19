@@ -1,6 +1,7 @@
 import Comments from "@/app/models/Comment";
 import Post from "@/app/models/Post";
 import { NextRequest, NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
 
 // Get Comment By Id
 export async function GET(req: NextRequest) {
@@ -48,10 +49,16 @@ export async function DELETE(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const params = searchParams.get("postId");
     // console.log(params);
-    
-    await Post.deleteOne({ _id: params });
 
-    return NextResponse.json({ message: "Delete Success", params });
+    if (!params) {
+      return NextResponse.json({ message: "postId parameter is missing" });
+    }
+    const postIdObject = new ObjectId(params);
+
+    // Perform the deletion
+    const result = await Post.deleteOne({ _id: postIdObject });
+
+    return NextResponse.json({ message: "Delete Success", result });
   } catch (error) {
     return NextResponse.json({ message: "Error to delete" });
   }
