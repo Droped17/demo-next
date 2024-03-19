@@ -18,23 +18,11 @@ export default function DeleteBlogButton() {
     }
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     // Redirect to "/"
-    try {
-      const res = await axios.delete(
-        `https://hotcoffeeblog.netlify.app/api/comment?postId=${id}`
-      );
-
-      console.log(res.data);
-
-      if (res.status === 200) {
-        router.push("/");
-      } else {
-        console.error("Error Deleting");
-      }
-    } catch (error) {
-      console.error(`Error`, error);
-    }
+    axios
+      .delete(`/api/comment?postId=${id}`)
+      .then((res) => console.log(res.data));
   };
 
   return (
