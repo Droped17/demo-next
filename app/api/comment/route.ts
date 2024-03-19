@@ -48,7 +48,7 @@ export async function DELETE(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const params = searchParams.get("postId");
     // console.log(params);
-
+    
     await Post.deleteOne({ _id: params });
 
     return NextResponse.json({ message: "Delete Success", params });

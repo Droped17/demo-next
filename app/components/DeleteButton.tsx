@@ -20,8 +20,9 @@ export default function DeleteBlogButton() {
 
   const handleConfirm = () => {
     // Redirect to "/"
+
     axios
-      .delete(`/api/comment?postId=${id}`)
+      .delete(`https://hotcoffeeblog.netlify.app/api/comment?postId=${id}`)
       .then((res) => console.log(res.data));
   };
 
