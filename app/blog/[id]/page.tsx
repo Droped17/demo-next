@@ -176,6 +176,7 @@ export default async function BlogId({ params }: { params: { id: string } }) {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
+  const formattedCreatedAt = formatDate(post?.createdAt);
   return (
     <div className="flex flex-col gap-4">
       <div className="lg:mx-[97px] md:mx-20">
@@ -194,7 +195,8 @@ export default async function BlogId({ params }: { params: { id: string } }) {
         <div className="flex gap-3">
           <p className="font-semibold ">Written by {post?.author}</p>
           <p className="text-gray-400">
-            {post?.createdAt && formatDate(post?.createdAt)}
+            {/* {post?.createdAt && formatDate(post?.createdAt)} */}
+            {formattedCreatedAt}
           </p>
         </div>
         <hr />
