@@ -132,9 +132,8 @@ const getPostById = async (postId: any) => {
     //   `http://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}`
     // );
     const res = await axios.get(
-      `/api/postById/?postId=${postId}` ||
-      `https://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}` 
-        || `http://localhost:3000/api/postById/?postId=${postId}`
+      `https://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}` ||
+        `/api/postById/?postId=${postId}`
     );
     console.log(res.data.foundPost);
     return res.data.foundPost;
