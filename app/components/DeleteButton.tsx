@@ -24,6 +24,9 @@ export default function DeleteBlogButton() {
     axios
       .delete(`https://hotcoffeeblog.netlify.app/api/comment?postId=${id}`)
       .then((res) => console.log(res.data));
+    //     axios
+    //   .delete(`/api/comment?postId=${id}`)
+    //   .then((res) => console.log(res.data));
   };
 
   return (

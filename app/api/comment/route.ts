@@ -54,11 +54,12 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ message: "postId parameter is missing" });
     }
     const postIdObject = new ObjectId(params);
+    console.log(`ID: ==> `,postIdObject._id);
 
     // Perform the deletion
-    const result = await Post.deleteOne({ _id: postIdObject });
+    await Post.deleteOne({ _id: postIdObject });
 
-    return NextResponse.json({ message: "Delete Success", result });
+    return NextResponse.json({ message: "Delete Success"});
   } catch (error) {
     return NextResponse.json({ message: "Error to delete" });
   }
