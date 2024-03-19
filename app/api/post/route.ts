@@ -1,5 +1,6 @@
 import Post from "@/app/models/Post";
 import { NextRequest, NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
 // import { limiter } from "../config/limiter";
 
 // Get All post
@@ -35,6 +36,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Post Success", postDetail });
   } catch (error) {
     return NextResponse.json({ message: "Error", error });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const searchParams = req.nextUrl.searchParams;
+    const params = searchParams.get("postId");
+    // console.log(params);
+
+    if (!params) {
+      return NextResponse.json({ message: "postId parameter is missing" });
+    }
+    const postIdObject = new ObjectId(params);
+    console.log(`ID: ==> `,postIdObject._id);
+
+    // Perform the deletion
+    const result = await Post.deleteOne({ _id: postIdObject });
+
+    return NextResponse.json({ message: "Delete Success"});
+  } catch (error) {
+    return NextResponse.json({ message: "Error to delete" });
   }
 }
 

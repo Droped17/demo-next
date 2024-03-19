@@ -44,23 +44,23 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: NextRequest) {
-  try {
-    const searchParams = req.nextUrl.searchParams;
-    const params = searchParams.get("postId");
-    // console.log(params);
+// export async function DELETE(req: NextRequest) {
+//   try {
+//     const searchParams = req.nextUrl.searchParams;
+//     const params = searchParams.get("postId");
+//     // console.log(params);
 
-    if (!params) {
-      return NextResponse.json({ message: "postId parameter is missing" });
-    }
-    const postIdObject = new ObjectId(params);
-    console.log(`ID: ==> `,postIdObject._id);
+//     if (!params) {
+//       return NextResponse.json({ message: "postId parameter is missing" });
+//     }
+//     const postIdObject = new ObjectId(params);
+//     console.log(`ID: ==> `,postIdObject._id);
 
-    // Perform the deletion
-    const result = await Post.deleteOne({ _id: postIdObject });
+//     // Perform the deletion
+//     const result = await Post.deleteOne({ _id: postIdObject });
 
-    return NextResponse.json({ message: "Delete Success"});
-  } catch (error) {
-    return NextResponse.json({ message: "Error to delete" });
-  }
-}
+//     return NextResponse.json({ message: "Delete Success"});
+//   } catch (error) {
+//     return NextResponse.json({ message: "Error to delete" });
+//   }
+// }
