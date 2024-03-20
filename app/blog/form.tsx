@@ -52,16 +52,15 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
         alert("Please fill in all required fields.");
         return; // Prevent further execution
       }
-      // axios
-      //   .post(
-      //     "https://hotcoffeeblog.netlify.app/api/comment" ||
-      //       `https://main--hotcoffeeblog.netlify.app/api/comment`,
-      //     { formData }
-      //   )
-      //   .then((result) => console.log(result.data));
-      const res = await axios.post("http://localhost:3000/api/comment", {
-        formData,
-      });
+      const res = await axios.post(
+        "https://hotcoffeeblog.netlify.app/api/comment" ||
+          `https://main--hotcoffeeblog.netlify.app/api/comment`,
+        { formData }
+      );
+
+      // const res = await axios.post("http://localhost:3000/api/comment", {
+      //   formData,
+      // });
 
       if (res.status === 200) {
         setFormData({
@@ -127,12 +126,12 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
               <div className="border-l-8 border-secondary p-1 bg-gray-100 rounded-md mt-3">
                 <div className="flex gap-2 items-center">
                   <Image
-                  alt="comment-img"
-                  src={comment.avatar}
-                  width={30}
-                  height={30}
-                  className="rounded-full"
-                />
+                    alt="comment-img"
+                    src={comment.avatar}
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
                   {/* <img
                   src={comment.avatar}
                   alt=""
