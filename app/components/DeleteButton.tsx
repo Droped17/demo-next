@@ -21,9 +21,15 @@ export default function DeleteBlogButton() {
   const handleConfirm = async() => {
     // Redirect to "/"
     try {
+      // work on local
+      // console.log(`ID IS ==> `,param.id);
+      // const res = await axios
+      // .delete(`http://localhost:3000/api/post/?postId=${param.id}`);
+      // console.log(res.data);
+
       console.log(`ID IS ==> `,param.id);
       const res = await axios
-      .delete(`http://localhost:3000/api/post/?postId=${param.id}`);
+      .delete(`https://hotcoffeeblog.netlify.app/api/post/?postId=${param.id}`);
       console.log(res.data);
       
     } catch (error) {
