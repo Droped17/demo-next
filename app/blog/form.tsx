@@ -37,9 +37,9 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
 
   const [formData, setFormData] = useState<FormData>({
     postId: postId,
-    name: session.user.name || session.user.email || "anonymous",
+    name: session?.user?.name || session?.user?.email || "anonymous",
     title: "",
-    avatar: session.user.name
+    avatar: session?.user?.name
       ? "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1088.jpg"
       : "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1150.jpg",
     createdAt: date,
@@ -105,19 +105,21 @@ export const BlogForm: React.FC<Props> = ({ session, postId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
-        onChange={handleOnChange}
-        name="title"
-        className="border w-full p-1"
-        value={formData.title}
-      />
-      <div className="text-end">
-        <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-primary rounded-md group-hover:bg-opacity-0">
-            Comment
-          </span>
-        </button>
-      </div>
+      {session && <div>
+        <textarea
+          onChange={handleOnChange}
+          name="title"
+          className="border w-full p-1"
+          value={formData.title}
+        />
+        <div className="text-end">
+          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-primary rounded-md group-hover:bg-opacity-0">
+              Comment
+            </span>
+          </button>
+        </div>
+      </div>}
 
       <div>
         {allComment.map((comment, index) => (

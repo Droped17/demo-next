@@ -209,11 +209,11 @@ export default async function BlogId({ params }: { params: { id: string } }) {
 
         <div className="p-5 border bg-gray-200 my-5">
           <p>Comment</p>
-          {session && (
+      
             <div className="mt-2">
               <BlogForm session={session} postId={params.id} />
             </div>
-          )}
+    
 
           {/* <div className="">
             <Comment postId={params.id} />
