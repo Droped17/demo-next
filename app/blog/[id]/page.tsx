@@ -215,9 +215,9 @@ export default async function BlogId({ params }: { params: { id: string } }) {
             </div>
           )}
 
-          <div className="">
+          {/* <div className="">
             <Comment postId={params.id} />
-          </div>
+          </div> */}
         </div>
       </div>
 
