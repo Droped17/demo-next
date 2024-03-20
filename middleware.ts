@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 
 const allowOrigins =
-  process.env.NODE_ENV === 'production' ? 'https://demo-next-jk36.vercel.app' : 'http://localhost:3000'
+  process.env.NODE_ENV === 'production' ? 'https://demo-next-jk36.vercel.app' : 'https://hotcoffeeblog.netlify.app'
 
 
 export function middleware(request: NextRequest) {

@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function DeleteBlogButton() {
-  const id = useParams();
+  const param = useParams();
   //   console.log(param);
   const router = useRouter();
   const [confirmDialog, setConfirmDialog] = useState(false);
@@ -18,12 +18,19 @@ export default function DeleteBlogButton() {
     }
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async() => {
     // Redirect to "/"
+    try {
+      console.log(`ID IS ==> `,param.id);
+      const res = await axios
+      .delete(`http://localhost:3000/api/post/?postId=${param.id}`);
+      console.log(res.data);
+      
+    } catch (error) {
+      console.error("Error",error);
+    }
 
-    axios
-      .delete(`https://hotcoffeeblog.netlify.app//api/post/?postId=${id}`)
-      .then((res) => console.log(res.data));
+    
     //     axios
     //   .delete(`/api/comment?postId=${id}`)
     //   .then((res) => console.log(res.data));

@@ -128,7 +128,7 @@ import DeleteBlogButton from "@/app/components/DeleteButton";
 
 const getPostById = async (postId: any) => {
   try {
-    console.log(postId);
+    // console.log(postId);
     // const res = await axios.get(
     //   `http://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}`
     // );
@@ -136,7 +136,7 @@ const getPostById = async (postId: any) => {
       `https://hotcoffeeblog.netlify.app/api/postById/?postId=${postId}` ||
         `/api/postById/?postId=${postId}`
     );
-    console.log(res.data.foundPost);
+    // console.log(res.data.foundPost);
     return res.data.foundPost;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -158,7 +158,7 @@ export default async function BlogId({ params }: { params: { id: string } }) {
   // const { data: session } = useSession();
 
   const session = await getServerSession(options);
-  console.log(`SESSION IS :===> `, session);
+  // console.log(`SESSION IS :===> `, session);
   // SSR
   // console.log(`SSR PARAM IS: ==> `,params);
   const post: Post = await getPostById(params.id);
@@ -199,9 +199,9 @@ export default async function BlogId({ params }: { params: { id: string } }) {
             <p className="text-gray-400">{formattedCreatedAt}</p>
           </div>
           {/* {post?.createdAt && formatDate(post?.createdAt)} */}
-          {/* {session && session.user?.name === post.author ? (
+          {session && session.user?.name === post.author ? (
             <DeleteBlogButton />
-          ) : null} */}
+          ) : null}
         </div>
         <hr />
 

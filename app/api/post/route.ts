@@ -43,8 +43,9 @@ export async function DELETE(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
     const params = searchParams.get("postId");
-    // console.log(params);
 
+    console.log(`DELETE===> `, params);
+    
     if (!params) {
       return NextResponse.json({ message: "postId parameter is missing" });
     }
