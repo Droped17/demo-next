@@ -31,7 +31,11 @@ export default function DeleteBlogButton() {
       const res = await axios
       .delete(`https://hotcoffeeblog.netlify.app/api/post/?postId=${param.id}`);
       console.log(res.data);
-      
+
+      if (res.status === 200) {
+        router.push("/"); 
+      }
+
     } catch (error) {
       console.error("Error",error);
     }
