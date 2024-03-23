@@ -1,21 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import { formatDate } from "@/lib/formatDate";
-import Post from "@/app/models/Post";
 import MoreBlog from "../MoreBlog";
 import Image from "next/image";
-
-interface Post {
-  _id: string;
-  author: string;
-  title: string;
-  detail: string;
-  createdAt: string;
-  avatar: string;
-}
+import { Posts } from "@/type";
 
 interface Props {
-  allPost: Post[];
+  allPost: Posts[];
   postMoreRender: any;
 }
 

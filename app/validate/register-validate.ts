@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const registerSchema = Joi.object({
-  username: Joi.string().trim().min(3).max(10).required().messages({
+  username: Joi.string().trim().min(5).max(10).required().messages({
     "string.min": "Username must be at least 5 characters",
     "string.max": "Username cannot exceed 10 characters",
     "any.required": "Please Enter Your Username",

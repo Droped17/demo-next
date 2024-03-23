@@ -4,22 +4,11 @@ import React, { FormEvent, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
 import moment from "moment";
+import { FormData } from "@/type";
 
-interface Props {
-  session: any;
-}
-
-interface FormData {
-  author: string;
-  title: string;
-  detail: string;
-  avatar: string;
-  createdAt: string;
-}
-// const currentDate: Date = new Date();
 const date = moment().format();
 
-export default function PostForm({ session }: Props) {
+export default function PostForm({ session }: any) {
   console.log(date);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
