@@ -1,12 +1,9 @@
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
-import PostForm from "./components/PostForm";
+import HomePostFormArticle from "@/ui/organisms/HomePostFormArticle";
 import BlogHomePage from "./components/homepage/BlogHomePage";
 import { Posts } from "@/type";
-import BannerImage from "@/ui/atoms/HomeBannerImage";
-import HomeText from "@/ui/atoms/HomeText";
-import HomeTitle from "@/ui/atoms/HomeTitle";
 import HomeBannerArticle from "@/ui/molecules/HomeBannerArticle";
 
 // Server Component
@@ -34,7 +31,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col gap-[39px]">
       <HomeBannerArticle />
-      <article>{session && <PostForm session={session} />}</article>
+      {session && <HomePostFormArticle session={session} />}
       <BlogHomePage allPost={allPost} postMoreRender={postMoreRender} />
     </main>
   );

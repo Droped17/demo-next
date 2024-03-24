@@ -4,12 +4,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 
 // Get Comment By Id
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const allComment = await Comments.find();
-    return NextResponse.json({ message: "GET Success", allComment });
+    return new NextResponse(
+      JSON.stringify({ message: "Get comment success", allComment }),
+      { status: 200 }
+    );
   } catch (error) {
-    return NextResponse.json({ message: "Error", error });
+    return new NextResponse(
+      JSON.stringify({ message: "Error to get comment"}),
+      { status: 500 }
+    );
   }
 }
 

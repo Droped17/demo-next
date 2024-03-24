@@ -15,6 +15,15 @@ export type FormData = {
     createdAt: string;
 };
 
+export type RegisterFormData = {
+    username: string;
+    password: string;
+    confirmPassword: string
+  }
+  
+  export type RegisterValidationError = {
+    [key: string]: string;
+  }
 
 
 

@@ -115,14 +115,10 @@
 import { options } from "@/app/api/auth/[...nextauth]/options";
 // import { useSession } from "next-auth/react"; //use becaue first time is client
 import { getServerSession } from "next-auth"; // need to change to this
-import axios, { all } from "axios";
+import axios from "axios";
 import { BlogForm } from "../form";
 import { formatDate } from "@/lib/formatDate";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowTurnUp } from "@fortawesome/free-solid-svg-icons";
-import Comment from "@/app/components/Comment";
 import Image from "next/image";
-import { Button } from "@/app/components/Button";
 import GoToTopButton from "@/app/components/GoToTopButton";
 import DeleteBlogButton from "@/app/components/DeleteButton";
 

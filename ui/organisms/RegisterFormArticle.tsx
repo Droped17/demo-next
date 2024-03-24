@@ -99,25 +99,19 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import registerSchema from "../validate/register-validate";
+import registerSchema from "@/app/validate/register-validate";
+import { RegisterFormData } from "@/type";
+import RegisterInput from "@/ui/atoms/RegisterInput";
+import RegisterErrorText from "@/ui/atoms/RegisterErrorText";
+import { RegisterValidationError } from "@/type";
 
-interface FormData {
-  username: string;
-  password: string;
-  confirmPassword: string
-}
-
-interface ValidationError {
-  [key: string]: string;
-}
-
-const registerValidate = (formData: FormData) => {
+const registerValidate = (formData: RegisterFormData) => {
   const { error } = registerSchema.validate(formData, {
     abortEarly: false,
   });
 
   if (error) {
-    const result: ValidationError = {};
+    const result: RegisterValidationError = {};
     error.details.forEach((detail) => {
       const { message, path } = detail;
       result[path[0]] = message;
@@ -129,13 +123,13 @@ const registerValidate = (formData: FormData) => {
 export default function RegisterPage() {
   const router = useRouter();
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegisterFormData>({
     username: "",
     password: "",
-    confirmPassword:""
+    confirmPassword: "",
   });
 
-  const [checkError, setCheckError] = useState<ValidationError>({});
+  const [checkError, setCheckError] = useState<RegisterValidationError>({});
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -150,21 +144,20 @@ export default function RegisterPage() {
         return setCheckError(validateError);
       }
       setCheckError({});
-          const res = await fetch("/api/auth/Users", {
-      method: "POST",
-      body: JSON.stringify({
-        formData,
-        "content-type": "application/json",
-      }),
-    });
+      const res = await fetch("/api/auth/Users", {
+        method: "POST",
+        body: JSON.stringify({
+          formData,
+          "content-type": "application/json",
+        }),
+      });
 
-    if (!res.ok) {
-      const response = await res.json();
-      console.error(response.message);
-    }
-    alert("Register Success");
-    router.push('/');
- 
+      if (!res.ok) {
+        const response = await res.json();
+        console.error(response.message);
+      }
+      alert("Register Success");
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -175,45 +168,40 @@ export default function RegisterPage() {
       className="flex flex-col w-5/12 mx-auto gap-5"
       onSubmit={handleSubmit}
     >
-      <input
+      <RegisterInput
         type="text"
-        className={`border p-3 ${
-          checkError.username ? "border-red-500 " : ""
-        }`}
-        placeholder="username"
-        name="username"
+        checkError={checkError.username}
+        text="username"
         onChange={handleOnChange}
-        value={formData.username}
+        formData={formData.username}
       />
       {checkError.username && (
-        <p className="text-red-500">{checkError.username}</p>
+        <RegisterErrorText checkError={checkError.username} />
       )}
-      <input
+      <RegisterInput
         type="password"
-        className={`border p-3 ${checkError.password ? "border-red-500 " : ""}`}
-        placeholder="password"
-        name="password"
+        checkError={checkError.password}
+        text="password"
         onChange={handleOnChange}
-        value={formData.password}
+        formData={formData.password}
       />
       {checkError.password && (
-        <span className="text-red-500">{checkError.password}</span>
+        <RegisterErrorText checkError={checkError.password} />
       )}
-      <input
+      <RegisterInput
         type="password"
-        className={`border p-3 ${
-          checkError.confirmPassword ? "border-red-500 " : ""
-        }`}
-        placeholder="confirm password"
-        name="confirmPassword"
+        checkError={checkError.confirmPassword}
+        text="confirm password"
         onChange={handleOnChange}
-        value={formData.confirmPassword}
+        formData={formData.confirmPassword}
       />
       {checkError.confirmPassword && (
-        <span className="text-red-500">{checkError.confirmPassword}</span>
+        <RegisterErrorText checkError={checkError.confirmPassword} />
       )}
 
-      <button className="bg-primary hover:bg-primary-hover transition rounded-full text-white px-4 py-3">Register</button>
+      <button className="bg-primary hover:bg-primary-hover transition rounded-full text-white px-4 py-3">
+        Register
+      </button>
     </form>
   );
 }
