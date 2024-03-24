@@ -7,7 +7,7 @@ import Footer from "@/ui/organisms/Footer";
 import Provider from "./Provider";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
-import connectDB from './utils/db';
+import connectDB from "./utils/db";
 config.autoAddCss = false;
 
 
@@ -25,6 +25,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   await connectDB();
   const session = await getServerSession();
   return (

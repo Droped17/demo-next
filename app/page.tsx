@@ -11,8 +11,7 @@ import HomeBannerArticle from "@/ui/molecules/HomeBannerArticle";
 const getAllPost = async () => {
   try {
     const res = await axios.get(
-      "https://demo-next-w6gp.vercel.app/api/post" ||
-        "https://main--hotcoffeeblog.netlify.app/api/post"
+      "https://main--hotcoffeeblog.netlify.app/api/post"
     );
     // console.log(res.data);
     return res.data.allPost;

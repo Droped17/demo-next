@@ -16,8 +16,8 @@ export async function GET(request: Request) {
     //     'Content-Type': 'application/json',
     //   }
     // });
-
-    return new NextResponse(JSON.stringify({message: "Get allPost success"}),{status: 200});
+    console.log(allPost);
+    return new NextResponse(JSON.stringify({message: "Get allPost success",allPost}),{status: 200});
   } catch (error) {
     return new NextResponse(JSON.stringify({message: "Error to GET allPost"}),{status: 500});
   }
