@@ -2,15 +2,15 @@ import mongoose, { Schema } from "mongoose";
 import connectDB from "../utils/db";
 import dotenv from 'dotenv';
 
-// dotenv.config();
-// const MONGODB_URI = process.env.MONGODB_URI;
+dotenv.config();
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// if (!MONGODB_URI) {
-//   throw new Error('MONGODB_URI is not defined in the environment variables.');
-// }
+if (!MONGODB_URI) {
+  throw new Error('MONGODB_URI is not defined in the environment variables.');
+}
 
-// mongoose.connect(MONGODB_URI);
-// mongoose.Promise = global.Promise;
+mongoose.connect(MONGODB_URI);
+mongoose.Promise = global.Promise;
 
 
 const postSchema = new Schema(

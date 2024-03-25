@@ -26,7 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   
-  await connectDB();
+  // await connectDB();
   const session = await getServerSession();
   return (
     <html lang="en">
